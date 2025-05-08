@@ -87,7 +87,20 @@
     {
       "groupName": "linting",
       "groupSlug": "linting",
-      "matchPackageNames": ["/eslint/", "/^@cspell/*/", "cspell"],
+      "matchPackageNames": [
+        "/eslint/",
+        "/^@cspell/*/",
+        "/^cspell$/",
+        "/^globals$/",
+      ],
+    },
+    {
+      "groupName": "types",
+      "groupSlug": "types",
+      "matchPackageNames": [
+        "/^@types/*/",
+        "/^type-fest$/",
+      ],
     },
     {
       "groupName": "Typia",
