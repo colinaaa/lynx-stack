@@ -263,10 +263,10 @@ export function hydrate(before: SnapshotInstance, after: SnapshotInstance, optio
           beforeChildNodes,
           diffResult,
           (node, target) => {
-            node.ensureElements();
+            const childElementRoot = node.ensureElements();
             __InsertElementBefore(
               before.__elements![elementIndex]!,
-              node.__element_root!,
+              childElementRoot,
               target?.__element_root,
             );
             return node;

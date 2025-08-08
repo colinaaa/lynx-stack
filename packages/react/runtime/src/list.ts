@@ -185,8 +185,7 @@ export function componentAtIndexFactory(
       return sign;
     }
 
-    childCtx.ensureElements();
-    const root = childCtx.__element_root!;
+    const root = childCtx.ensureElements();
     __AppendElement(list, root);
     const sign = __GetElementUniqueID(root);
     applyRefQueue();

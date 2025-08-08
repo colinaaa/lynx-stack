@@ -298,11 +298,12 @@ export class SnapshotInstance {
     snapshotInstanceManager.values.set(id, this);
   }
 
-  ensureElements(): void {
+  ensureElements(): FiberElement {
     const { create, slot, isListHolder, cssId, entryName } = this.__snapshot_def;
     const elements = create!(this);
     this.__elements = elements;
-    this.__element_root = elements[0];
+    const elementRoot = elements[0]!;
+    this.__element_root = elementRoot;
 
     if (cssId === undefined) {
       // This means either:
@@ -335,22 +336,22 @@ export class SnapshotInstance {
       let index = 0;
       let child = this.__firstChild;
       while (child) {
-        child.ensureElements();
+        const childElementRoot = child.ensureElements();
 
         const [type, elementIndex] = slot[index]!;
         switch (type) {
           case DynamicPartType.Slot: {
-            __ReplaceElement(child.__element_root!, elements[elementIndex]!);
-            elements[elementIndex] = child.__element_root!;
+            __ReplaceElement(childElementRoot, elements[elementIndex]!);
+            elements[elementIndex] = childElementRoot;
             index++;
             break;
           }
           /* v8 ignore start */
           case DynamicPartType.MultiChildren: {
             if (__GetTag(elements[elementIndex]!) === 'wrapper') {
-              __ReplaceElement(child.__element_root!, elements[elementIndex]!);
+              __ReplaceElement(childElementRoot, elements[elementIndex]!);
             } else {
-              __AppendElement(elements[elementIndex]!, child.__element_root!);
+              __AppendElement(elements[elementIndex]!, childElementRoot);
             }
             index++;
             break;
@@ -358,7 +359,7 @@ export class SnapshotInstance {
           /* v8 ignore end */
           case DynamicPartType.Children:
           case DynamicPartType.ListChildren: {
-            __AppendElement(elements[elementIndex]!, child.__element_root!);
+            __AppendElement(elements[elementIndex]!, childElementRoot);
             break;
           }
         }
@@ -366,6 +367,7 @@ export class SnapshotInstance {
         child = child.__nextSibling;
       }
     }
+    return elementRoot;
   }
 
   unRenderElements(): void {
@@ -524,9 +526,10 @@ export class SnapshotInstance {
     const shouldRemove = newNode.__parent === this;
     this.__insertBefore(newNode, existingNode);
     const __elements = this.__elements;
+    let newNodeElementRoot = newNode.__element_root;
     if (__elements) {
       if (!newNode.__elements) {
-        newNode.ensureElements();
+        newNodeElementRoot = newNode.ensureElements();
       }
     } else {
       return;
@@ -537,31 +540,31 @@ export class SnapshotInstance {
       const [, elementIndex] = __snapshot_def.slot[0]!;
       const parent = __elements[elementIndex]!;
       if (shouldRemove) {
-        __RemoveElement(parent, newNode.__element_root!);
+        __RemoveElement(parent, newNodeElementRoot!);
       }
       if (existingNode) {
         __InsertElementBefore(
           parent,
-          newNode.__element_root!,
+          newNodeElementRoot!,
           existingNode.__element_root,
         );
       } else {
-        __AppendElement(parent, newNode.__element_root!);
+        __AppendElement(parent, newNodeElementRoot!);
       }
     } else if (count > 1) {
       const index = this.__current_slot_index++;
       const [s, elementIndex] = __snapshot_def.slot[index]!;
 
       if (s === DynamicPartType.Slot) {
-        __ReplaceElement(newNode.__element_root!, __elements[elementIndex]!);
-        __elements[elementIndex] = newNode.__element_root!;
+        __ReplaceElement(newNodeElementRoot!, __elements[elementIndex]!);
+        __elements[elementIndex] = newNodeElementRoot!;
 
         /* v8 ignore start */
       } else if (s === DynamicPartType.MultiChildren) {
         if (__GetTag(__elements[elementIndex]!) === 'wrapper') {
-          __ReplaceElement(newNode.__element_root!, __elements[elementIndex]!);
+          __ReplaceElement(newNodeElementRoot!, __elements[elementIndex]!);
         } else {
-          __AppendElement(__elements[elementIndex]!, newNode.__element_root!);
+          __AppendElement(__elements[elementIndex]!, newNodeElementRoot!);
         }
       }
       /* v8 ignore end */
