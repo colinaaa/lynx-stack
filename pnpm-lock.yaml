@@ -32,6 +32,9 @@ patchedDependencies:
   '@rollup/plugin-typescript':
     hash: 926ba262ec682d27369f1a8648a0dfb657fb5f1b28539ca3628d292276c91c3d
     path: patches/@rollup__plugin-typescript.patch
+  '@rspack/test-tools':
+    hash: 7e2b8ce8c4424b0bb7649261457dbd9fa0a212a3afdea99ac544ed824af084f0
+    path: patches/@rspack__test-tools.patch
 
 importers:
 
@@ -1194,7 +1197,7 @@ importers:
         version: 1.5.8(@swc/helpers@0.5.17)
       '@rspack/test-tools':
         specifier: catalog:rspack
-        version: 1.5.8(@rspack/core@1.5.8(@swc/helpers@0.5.17))
+        version: 1.5.8(patch_hash=7e2b8ce8c4424b0bb7649261457dbd9fa0a212a3afdea99ac544ed824af084f0)(@rspack/core@1.5.8(@swc/helpers@0.5.17))
       '@types/fs-extra':
         specifier: 11.0.4
         version: 11.0.4
@@ -10015,7 +10018,7 @@ snapshots:
       html-entities: 2.6.0
       react-refresh: 0.17.0
 
-  '@rspack/test-tools@1.5.8(@rspack/core@1.5.8(@swc/helpers@0.5.17))':
+  '@rspack/test-tools@1.5.8(patch_hash=7e2b8ce8c4424b0bb7649261457dbd9fa0a212a3afdea99ac544ed824af084f0)(@rspack/core@1.5.8(@swc/helpers@0.5.17))':
     dependencies:
       '@babel/generator': 7.28.3
       '@babel/parser': 7.28.4

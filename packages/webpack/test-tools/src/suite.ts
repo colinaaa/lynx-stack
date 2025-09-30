@@ -5,25 +5,15 @@ import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import {
-  BasicRunnerFactory,
-  ECompilerType,
-  NodeRunner,
-  TestContext,
-} from '@rspack/test-tools';
+import { ECompilerType, TestContext } from '@rspack/test-tools';
 import type {
   IGlobalContext,
-  ITestContext,
   ITestEnv,
   ITestProcessor,
-  ITestRunner,
   TCompiler,
   TCompilerFactory,
-  TCompilerOptions,
-  TCompilerStatsCompilation,
-  TRunnerFactory,
   TTestConfig,
-  TUpdateOptions,
+  TTestRunnerCreator,
 } from '@rspack/test-tools';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
@@ -81,10 +71,7 @@ interface TRunnerOutput {
 export function createRunner(
   src: string,
   dist: string,
-  runnerFactory: new(
-    name: string,
-    context: ITestContext,
-  ) => TRunnerFactory<ECompilerType>,
+  runnerCreator: TTestRunnerCreator,
   options: {
     afterExecute?: TAfterExecuteFn | undefined;
     beforeExecute?: TBeforeExecuteFn | undefined;
@@ -118,7 +105,7 @@ export function createRunner(
           options,
         ) as TCompiler<ECompilerType>,
     },
-    runnerFactory,
+    runnerCreator,
     testConfig,
   });
   const runner = function run(name: string, processor: ITestProcessor) {
@@ -188,52 +175,4 @@ export function createRunner(
   };
 
   return runner;
-}
-
-export class RspeedyNormalRunner<
-  T extends ECompilerType = ECompilerType.Rspack,
-> extends NodeRunner<T> {
-  override async run<T>(
-    file: string,
-  ): Promise<{ exports: T; context: typeof globalThis }> {
-    const res = await super.run(file) as T;
-    return {
-      exports: res,
-      context: global,
-    };
-  }
-}
-
-export class RspeedyNormalRunnerFactory<
-  T extends ECompilerType,
-> extends BasicRunnerFactory<T> {
-  override createRunner(
-    _: string,
-    __: TCompilerStatsCompilation<T>,
-    compilerOptions: TCompilerOptions<T>,
-    env: ITestEnv,
-  ): ITestRunner {
-    return new RspeedyNormalRunner({
-      env,
-      name: this.name,
-      runInNewContext: false,
-      testConfig: this.context.getTestConfig(),
-      source: this.context.getSource(),
-      dist: this.context.getDist(),
-      compilerOptions: compilerOptions,
-    });
-  }
-}
-
-export async function getOptions<T>(path: string): Promise<T> {
-  const options = await import(path) as
-    & { default?: T }
-    & T;
-
-  return options.default ?? options;
-}
-
-export interface TImportedBundler {
-  HotModuleReplacementPlugin: new() => unknown;
-  LoaderOptionsPlugin: new(update: TUpdateOptions) => unknown;
 }

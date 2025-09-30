@@ -1,0 +1,21 @@
+diff --git a/dist/case/package.json b/dist/case/package.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..5bbefffbabee392d1855491b84dc0a716b6a3bf2
+--- /dev/null
++++ b/dist/case/package.json
+@@ -0,0 +1,3 @@
++{
++  "type": "commonjs"
++}
+diff --git a/package.json b/package.json
+index 85648130ddacdb4fe3eae306544d017f3080ada3..827c965b3c55ff456292be616603704913502822 100644
+--- a/package.json
++++ b/package.json
+@@ -9,6 +9,7 @@
+     ".": {
+       "default": "./dist/index.js"
+     },
++    "./case/*": "./dist/case/*",
+     "./setup-expect": "./dist/helper/setup-expect.js",
+     "./setup-env": "./dist/helper/setup-env.js",
+     "./setup-wasm": "./dist/helper/setup-wasm.js",
