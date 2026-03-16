@@ -120,6 +120,27 @@ describe('addComponentElement', () => {
     `);
   });
 
+  it('should ignore non-component attrs when collecting spread attrs', () => {
+    class C extends ComponentFromReactRuntime {
+      render() {
+        return <view />;
+      }
+    }
+
+    let captured;
+    const jsx = wrapWithLynxComponent((component, spread) => {
+      captured = spread;
+      return component;
+    }, <C id='1' foo='bar' />);
+
+    expect(captured).toMatchInlineSnapshot(`
+      {
+        "id": "1",
+      }
+    `);
+    expect(jsx.props.foo).toBe('bar');
+  });
+
   it('should not render a fake component element \'view\' when component is not from legacy-react-runtime', () => {
     const jsx = wrapWithLynxComponent(snapshot, <Fragment />);
 
