@@ -69,31 +69,28 @@ class RefProxy {
     return new Proxy(this, {
       get: (target, prop, receiver) => {
         if (
-          typeof prop === 'symbol'
+          typeof prop !== 'string'
           || prop === 'then'
           || prop in target
-          || typeof prop !== 'string'
         ) {
           return Reflect.get(target, prop, receiver);
         }
 
-        const forward = <K extends ForwardableNodesRefMethod>(method: K) => {
-          return (...args: Parameters<NodesRef[K]>) => {
-            return new RefProxy(target.refAttr).setTask(method, args);
-          };
+        return (...args: unknown[]) => {
+          return new RefProxy(target.refAttr).setTask(prop as any, args as any);
         };
-
-        return forward(prop as ForwardableNodesRefMethod);
       },
     }) as RefProxy;
   }
 
-  private setTask<K extends ForwardableNodesRefMethod>(
-    method: K,
-    args: Parameters<NodesRef[K]>,
+  private setTask(
+    method: any,
+    args: any,
   ): this {
     this.task = (nodesRef) => {
-      const nodesRefMethod = nodesRef[method] as (...params: Parameters<NodesRef[K]>) => SelectorQuery;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const nodesRefMethod = (nodesRef as any)[method] as (...params: any[]) => SelectorQuery;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return nodesRefMethod.apply(nodesRef, args);
     };
     return this;

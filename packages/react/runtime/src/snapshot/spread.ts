@@ -40,6 +40,29 @@ const noFlattenAttributes = /* @__PURE__ */ new Set<string>([
   'exposure-id',
 ]);
 
+function createFakeSnapshot(
+  snapshot: SnapshotInstance,
+  index: number,
+  value: unknown,
+  target?: Record<string, unknown>,
+  key?: string,
+  extras?: object,
+): SnapshotInstance {
+  return {
+    __values: {
+      get [index]() {
+        return value;
+      },
+      set [index](v: unknown) {
+        if (target && key) target[key] = v;
+      },
+    },
+    __id: snapshot.__id,
+    __elements: snapshot.__elements,
+    ...extras,
+  } as SnapshotInstance;
+}
+
 function updateSpread(
   snapshot: SnapshotInstance,
   index: number,
@@ -64,15 +87,7 @@ function updateSpread(
       snapshot.__listItemPlatformInfo = platformInfo;
 
       // The fakeSnapshot is missing `__parent`, so no `ListUpdateInfoRecording#onSetAttribute` will be called
-      const fakeSnapshot = {
-        __values: {
-          get [index]() {
-            return platformInfo;
-          },
-        },
-        __id: snapshot.__id,
-        __elements: snapshot.__elements,
-      } as SnapshotInstance;
+      const fakeSnapshot = createFakeSnapshot(snapshot, index, platformInfo);
       updateListItemPlatformInfo(fakeSnapshot, index, oldPlatformInfo, elementIndex);
     }
   }
@@ -103,32 +118,13 @@ function updateSpread(
       } else if (key.startsWith('data-')) {
         // collected below
       } else if (key === 'ref') {
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return v;
-            },
-            set [index](value: unknown) {
-              // Modifications to the ref value should be reflected in the corresponding position of the spread.
-              newValue[key] = value;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, v, newValue, key);
         updateRef(fakeSnapshot, index, oldValue[key] as string | null, elementIndex);
       } else if (key.endsWith(':ref')) {
         snapshot.__worklet_ref_set ??= new Set();
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return v;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, v, undefined, undefined, {
           __worklet_ref_set: snapshot.__worklet_ref_set,
-        } as SnapshotInstance;
+        });
         updateWorkletRef(
           fakeSnapshot,
           index,
@@ -138,33 +134,13 @@ function updateSpread(
         );
       } else if (key.endsWith(':gesture')) {
         const workletType = key.slice(0, -8);
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return v;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, v);
         updateGesture(fakeSnapshot, index, oldValue[key], elementIndex, workletType);
       } else if ((match = eventRegExp.exec(key))) {
         const workletType = match[2];
         const eventType = eventTypeMap[match[3]!]!;
         const eventName = match[4]!;
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return v;
-            },
-            set [index](value: unknown) {
-              // Modifications to the event value should be reflected in the corresponding position of the spread.
-              newValue[key] = value;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, v, newValue, key);
         if (workletType) {
           updateWorkletEvent(
             fakeSnapshot,
@@ -203,32 +179,13 @@ function updateSpread(
       } else if (key.startsWith('data-')) {
         // collected below
       } else if (key === 'ref') {
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return undefined;
-            },
-            set [index](value: unknown) {
-              // Modifications to the ref value should be reflected in the corresponding position of the spread.
-              newValue[key] = value;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, undefined, newValue, key);
         updateRef(fakeSnapshot, index, oldValue[key] as string | null, elementIndex);
       } else if (key.endsWith(':ref')) {
         snapshot.__worklet_ref_set ??= new Set();
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return undefined;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, undefined, undefined, undefined, {
           __worklet_ref_set: snapshot.__worklet_ref_set,
-        } as SnapshotInstance;
+        });
         updateWorkletRef(
           fakeSnapshot,
           index,
@@ -238,32 +195,13 @@ function updateSpread(
         );
       } else if (key.endsWith(':gesture')) {
         const workletType = key.slice(0, -8);
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return undefined;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, undefined);
         updateGesture(fakeSnapshot, index, oldValue[key], elementIndex, workletType);
       } else if ((match = eventRegExp.exec(key))) {
         const workletType = match[2];
         const eventType = eventTypeMap[match[3]!]!;
         const eventName = match[4]!;
-        const fakeSnapshot = {
-          __values: {
-            get [index]() {
-              return undefined;
-            },
-            set [index](value: unknown) {
-              newValue[key] = value;
-            },
-          },
-          __id: snapshot.__id,
-          __elements: snapshot.__elements,
-        } as SnapshotInstance;
+        const fakeSnapshot = createFakeSnapshot(snapshot, index, undefined, newValue, key);
         if (workletType) {
           updateWorkletEvent(
             fakeSnapshot,

@@ -1,7 +1,9 @@
 // Copyright 2024 The Lynx Authors. All rights reserved.
 // Licensed under the Apache License Version 2.0 that can be found in the
 // LICENSE file in the root directory of this source tree.
+import { createContext, createElement } from 'preact';
 import type { ComponentChildren, Consumer, Context, Provider } from 'preact';
+import { useState } from 'preact/hooks';
 import type { ComponentClass } from 'react';
 
 import { useLynxGlobalEventListener } from '../hooks/useLynxGlobalEventListener.js';
@@ -13,12 +15,6 @@ type Getter<T> = {
 
 // for better reuse if runtime is changed
 export function factory<Data>(
-  { createContext, useState, createElement, useLynxGlobalEventListener: useListener }: {
-    createContext: typeof import('preact').createContext;
-    useState: typeof import('preact/hooks').useState;
-    createElement: typeof import('preact').createElement;
-    useLynxGlobalEventListener: typeof useLynxGlobalEventListener;
-  },
   prop: '__globalProps' | '__initData',
   eventName: string,
 ): Getter<{
@@ -67,7 +63,7 @@ export function factory<Data>(
 
   const useChanged = (callback: (__: Data) => void) => {
     if (!__LEPUS__) {
-      useListener(eventName, callback);
+      useLynxGlobalEventListener(eventName, callback);
     }
   };
 

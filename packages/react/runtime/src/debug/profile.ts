@@ -4,7 +4,7 @@
 
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 
-export const isProfiling: boolean = /* @__PURE__ */ Boolean(
+export const isProfiling: boolean = (typeof __PROFILE__ !== 'undefined' && __PROFILE__) && /* @__PURE__ */ Boolean(
   lynx.performance?.isProfileRecording?.(),
 );
 

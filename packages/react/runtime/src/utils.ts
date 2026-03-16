@@ -7,22 +7,12 @@ import type { ComponentClass } from 'preact';
 import { getCurrentVNode, getOwnerStack } from './debug/component-stack.js';
 
 export function isDirectOrDeepEqual(a: any, b: any): boolean {
-  if (a === b) {
-    return true;
-  }
+  if (a === b) return true;
+  if (typeof a !== 'object' || !a || typeof b !== 'object' || !b) return false;
   try {
-    if (
-      typeof a == 'object' && a !== null && typeof b == 'object' && b !== null
-      && JSON.stringify(a) === JSON.stringify(b)
-    ) {
-      return true;
-    }
+    return JSON.stringify(a) === JSON.stringify(b);
   } catch (error) {
     if (__DEV__ && /circular|cyclic/i.test((error as Error).message)) {
-      // JavaScript engines give this different errors name and messages:
-      // PrimJS: "circular reference"
-      // JavaScriptCore: "JSON.stringify cannot serialize cyclic structures"
-      // V8: "Converting circular structure to JSON"
       const vnode = getCurrentVNode();
       if (vnode) {
         const stack = getOwnerStack(vnode);
@@ -31,7 +21,6 @@ export function isDirectOrDeepEqual(a: any, b: any): boolean {
     }
     throw error;
   }
-  return false;
 }
 
 export function isEmptyObject(obj?: object): obj is Record<string, never> {
@@ -56,12 +45,8 @@ export function pick<T extends object, K extends keyof T>(obj: T, keys: Iterable
 }
 
 export function maybePromise<T>(value: unknown): value is Promise<T> {
-  return (
-    typeof value === 'object'
-    && value !== null
-    // @ts-expect-error the check is safe
-    && typeof value.then === 'function'
-  );
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  return typeof value === 'object' && !!value && typeof (value as any).then === 'function';
 }
 
 export function getDisplayName(type: ComponentClass): string {
@@ -81,24 +66,15 @@ export function hook<T, K extends keyof T>(
 }
 
 export const lynxQueueMicrotask: typeof lynx.queueMicrotask = /* @__PURE__ */ (() => {
-  if (lynx.queueMicrotask) {
-    return (fn) => lynx.queueMicrotask(fn);
-  } else if (typeof globalThis.Promise === 'function') {
-    const resolved = globalThis.Promise.resolve();
-    /* v8 ignore start */
-    return (fn) => {
-      // Schedule as a microtask, and surface exceptions like queueMicrotask would.
-      resolved.then(fn).catch((err) => {
-        setTimeout(() => {
-          throw err;
-        }, 0);
-      });
-    };
-  } else {
-    // Fallback to macrotask when microtasks aren't available.
-    return (fn) => {
-      setTimeout(fn, 0);
-    };
-  }
+  if (lynx.queueMicrotask) return (fn) => lynx.queueMicrotask(fn);
+  const resolved = Promise.resolve();
+  /* v8 ignore start */
+  return (fn) => {
+    resolved.then(fn).catch((err) => {
+      setTimeout(() => {
+        throw err;
+      }, 0);
+    });
+  };
   /* v8 ignore stop */
 })();

@@ -2,13 +2,9 @@
 // Licensed under the Apache License Version 2.0 that can be found in the
 // LICENSE file in the root directory of this source tree.
 import { render } from 'preact';
-import { createContext, createElement } from 'preact/compat';
-import { useState } from 'preact/hooks';
 import type { Consumer, FC, ReactNode } from 'react';
 
 import { factory, withInitDataInState } from './compat/initData.js';
-import { profileEnd, profileStart } from './debug/profile.js';
-import { useLynxGlobalEventListener } from './hooks/useLynxGlobalEventListener.js';
 import { LifecycleConstant } from './lifecycleConstant.js';
 import { flushDelayedLifecycleEvents } from './lynx/tt.js';
 import { __root } from './root.js';
@@ -88,14 +84,8 @@ export const root: Root = {
       __root.__jsx = jsx;
     } else {
       __root.__jsx = jsx;
-      if (typeof __PROFILE__ !== 'undefined' && __PROFILE__) {
-        profileStart('ReactLynx::renderBackground');
-      }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       render(jsx, __root as any);
-      if (typeof __PROFILE__ !== 'undefined' && __PROFILE__) {
-        profileEnd();
-      }
       if (__FIRST_SCREEN_SYNC_TIMING__ === 'immediately') {
         // This is for cases where `root.render()` is called asynchronously,
         // `firstScreen` message might have been reached.
@@ -112,12 +102,6 @@ export const root: Root = {
 };
 
 const _InitData = /* @__PURE__ */ factory<InitData>(
-  {
-    createContext,
-    useState,
-    createElement,
-    useLynxGlobalEventListener,
-  },
   '__initData',
   'onDataChanged',
 );
