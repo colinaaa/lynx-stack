@@ -49,4 +49,19 @@ describe('snapshot workletRef branch guards', () => {
 
     expect(() => updateWorkletRef(snapshot as never, 0, undefined, 0, 'main-thread')).not.toThrow();
   });
+
+  it('tolerates queued refs whose marker fields are removed before flush', () => {
+    const element = { tag: 'view', props: {} };
+    const refLike = { _wvid: 1 };
+    const snapshot = {
+      __elements: [element],
+      __values: [refLike],
+      __worklet_ref_set: new Set(),
+    };
+
+    updateWorkletRef(snapshot as never, 0, undefined, 0, 'main-thread');
+    delete (refLike as { _wvid?: number })._wvid;
+
+    expect(() => applyRefQueue()).not.toThrow();
+  });
 });
