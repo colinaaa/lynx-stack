@@ -133,11 +133,7 @@ function onLifecycleEventImpl(type: LifecycleConstant, data: unknown): void {
         // eslint-disable-next-line prefer-const
         let [idStr, ...rest] = handlerName.split(':');
         while (jsReadyEventIdSwap[idStr!]) idStr = jsReadyEventIdSwap[idStr!]?.toString();
-        try {
-          publishEvent([idStr, ...rest].join(':'), data);
-        } catch (e) {
-          lynx.reportError(e as Error);
-        }
+        publishEvent([idStr, ...rest].join(':'), data);
       }
       delayedEvents.length = 0;
 

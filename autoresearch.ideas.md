@@ -1,7 +1,7 @@
 # Optimization Ideas
 
-- **Simplify `tt.ts` first-screen path**: continue reducing branchy hydration/event code in `onLifecycleEventImpl`, prioritizing behavior-preserving inlining and redundant-check removal.
-- **Alog/code-splitting hygiene**: verify `__ALOG__`-guarded debug formatting paths are fully eliminated from production bundles.
+- **Simplify `tt.ts` first-screen path**: continue reducing branchy hydration/event code in `onLifecycleEventImpl`, focusing on behavior-preserving inlining and redundant-state cleanup.
+- **Alog/code-splitting hygiene**: verify `__ALOG__`-guarded debug formatting/logging paths are fully eliminated from production bundles.
 - **Review `renderToOpcodes` surface**: confirm SSR/main-thread-only paths are not retained in the `examples/react` background runtime bundle.
 - **Diff/hydrate hot paths**: inspect `hydrate.ts`/`backgroundSnapshot.ts` for repeated helper patterns that can be consolidated safely.
 
@@ -14,3 +14,6 @@
 - `updateAttribute` event-regex branch reshaping in `spread.ts` (tried; no size change).
 - Hoist `__PROFILE__` check to local in `onLifecycleEvent` (tried; no size change).
 - `runWithForce` optional-chaining simplification (tried; size regression).
+- `tt.ts` hydration commit-task `forEach` -> `for...of` conversion (tried; size regression).
+- `delayLifecycleEvent` arrow conversion (tried; no size change).
+- `tt.processCardConfig` flattening (tried; no size change).
