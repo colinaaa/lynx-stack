@@ -47,4 +47,48 @@ describe('ElementPAPICall Alog', () => {
       ]
     `);
   });
+
+  it('should skip profile hooks when __PROFILE__ is false and omit null results', () => {
+    const originalProfile = __PROFILE__;
+    globalThis.__PROFILE__ = false;
+
+    const host = {
+      __GetTag: () => 'page',
+      __GetElementUniqueID: () => 7,
+      __CreatePage: () => ({ kind: 'page' }),
+      __SetID: () => null,
+    };
+
+    let createElementReads = 0;
+    Object.defineProperty(host, '__CreateElement', {
+      configurable: true,
+      enumerable: true,
+      get() {
+        createElementReads++;
+        return createElementReads === 1 ? () => ({ kind: 'node' }) : 1;
+      },
+    });
+
+    const profileStartSpy = vi.spyOn(console, 'profile').mockImplementation(() => {});
+    const profileEndSpy = vi.spyOn(console, 'profileEnd').mockImplementation(() => {});
+    console.alog = vi.fn();
+
+    try {
+      initElementPAPICallAlog(host);
+      const page = host.__CreatePage('0', 0);
+      host.__SetID(page, 1);
+
+      expect(createElementReads).toBeGreaterThan(1);
+      expect(profileStartSpy).not.toHaveBeenCalled();
+      expect(profileEndSpy).not.toHaveBeenCalled();
+      expect(console.alog.mock.calls).toEqual([
+        ['[ReactLynxDebug] FiberElement API call #1: __CreatePage("0", 0) => page#7'],
+        ['[ReactLynxDebug] FiberElement API call #2: __SetID(page#7, 1)'],
+      ]);
+    } finally {
+      globalThis.__PROFILE__ = originalProfile;
+      profileStartSpy.mockRestore();
+      profileEndSpy.mockRestore();
+    }
+  });
 });
