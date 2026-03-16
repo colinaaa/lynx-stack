@@ -1,9 +1,9 @@
 # Optimization Ideas
 
-- **Simplify `tt.ts` lifecycle handling**: `onLifecycleEventImpl` first-screen path is large and branchy; target code-size-neutral refactors that enable better DCE (especially around logging/profiling guarded blocks).
+- **Simplify `tt.ts` first-screen path**: continue reducing branchy hydration/event code in `onLifecycleEventImpl`, prioritizing behavior-preserving inlining and redundant-check removal.
 - **Alog/code-splitting hygiene**: verify `__ALOG__`-guarded debug formatting paths are fully eliminated from production bundles.
-- **Review `renderToOpcodes` surface**: confirm we are not retaining SSR/main-thread-only paths in the background runtime bundle for `examples/react`.
-- **Diff/hydrate hot paths**: inspect `hydrate.ts`/`backgroundSnapshot.ts` for repeated helper patterns that can be consolidated without behavior changes.
+- **Review `renderToOpcodes` surface**: confirm SSR/main-thread-only paths are not retained in the `examples/react` background runtime bundle.
+- **Diff/hydrate hot paths**: inspect `hydrate.ts`/`backgroundSnapshot.ts` for repeated helper patterns that can be consolidated safely.
 
 ## Pruned as explored
 
@@ -12,3 +12,5 @@
 - `const enum` conversion for `SnapshotOperation` (tried; major size regression due enum runtime emit).
 - Remove pretty patch formatting dependency in `updateMainThread` ALOG path (tried; no size change).
 - `updateAttribute` event-regex branch reshaping in `spread.ts` (tried; no size change).
+- Hoist `__PROFILE__` check to local in `onLifecycleEvent` (tried; no size change).
+- `runWithForce` optional-chaining simplification (tried; size regression).
