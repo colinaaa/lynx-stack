@@ -4,6 +4,7 @@
 - **Alog/code-splitting hygiene**: verify `__ALOG__`-guarded debug formatting/logging paths are fully eliminated from production bundles.
 - **Review `renderToOpcodes` surface**: confirm SSR/main-thread-only paths are not retained in the `examples/react` background runtime bundle.
 - **Diff/hydrate hot paths**: inspect `hydrate.ts`/`backgroundSnapshot.ts` for repeated helper patterns that can be consolidated safely.
+- **Hook callback dedup sweep**: continue finding repeated hook callback wrappers in runtime lifecycle/performance modules where generic shared handlers may reduce emitted code.
 
 ## Pruned as explored
 
@@ -17,3 +18,7 @@
 - `tt.ts` hydration commit-task `forEach` -> `for...of` conversion (tried; size regression).
 - `delayLifecycleEvent` arrow conversion (tried; no size change).
 - `tt.processCardConfig` flattening (tried; no size change).
+- `hydrate.ts` forEach-to-for conversion in hydrate path (tried; size regression).
+- `destroy.ts` forEach-to-for-of conversion (tried; size regression).
+- `isRendering.ts` inlining set helper into callback (tried; no size change).
+- `performance.ts` helper inlining into hook callback (tried; no size change).
