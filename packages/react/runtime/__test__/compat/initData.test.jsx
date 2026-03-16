@@ -67,6 +67,12 @@ describe('initData', () => {
 
 describe('withInitDataInState', () => {
   let app;
+
+  it('should return original component when wrapping a function component', () => {
+    const FnComp = () => <view />;
+    expect(withInitDataInState(FnComp)).toBe(FnComp);
+  });
+
   class App extends Component {
     constructor() {
       super();
