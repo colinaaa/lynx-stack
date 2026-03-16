@@ -1,6 +1,6 @@
 /** @jsxImportSource ../lepus */
 
-import { Component, createContext, Fragment } from 'preact';
+import { Component, createContext, Fragment, options } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -9,6 +9,7 @@ import { globalEnvManager } from './utils/envManager';
 import { setupDocument } from '../src/document';
 import { renderOpcodesInto } from '../src/opcodes';
 import renderToString from '../src/renderToOpcodes';
+import { COMMIT, DIFF, DIFF2, DIFFED, RENDER } from '../src/renderToOpcodes/constants';
 import { setupPage, SnapshotInstance, snapshotInstanceManager } from '../src/snapshot';
 import { createElement, cloneElement } from '../lepus';
 import { Suspense } from 'preact/compat';
@@ -55,6 +56,78 @@ describe('renderToOpcodes', () => {
         1,
       ]
     `);
+  });
+
+  it('should render without preact diff/render hooks', () => {
+    class ClassComp extends Component {
+      render() {
+        return 'class';
+      }
+    }
+
+    function FnComp() {
+      return 2;
+    }
+
+    const previous = {
+      [COMMIT]: options[COMMIT],
+      [DIFF]: options[DIFF],
+      [DIFF2]: options[DIFF2],
+      [DIFFED]: options[DIFFED],
+      [RENDER]: options[RENDER],
+      unmount: options.unmount,
+    };
+
+    options[COMMIT] = undefined;
+    options[DIFF] = undefined;
+    options[DIFF2] = undefined;
+    options[DIFFED] = undefined;
+    options[RENDER] = undefined;
+    options.unmount = undefined;
+
+    try {
+      const rawVNode = {
+        type: 'raw',
+        props: {
+          key: 'k',
+          ref: vi.fn(),
+          __self: { debug: true },
+          __source: 'debug',
+          keep: 'ok',
+          nullable: null,
+          disabled: false,
+          onTap: () => {},
+          children: 'raw-child',
+        },
+      };
+
+      const opcodes = renderToString(
+        createElement(
+          Fragment,
+          null,
+          createElement(ClassComp),
+          createElement(FnComp),
+          rawVNode,
+        ),
+      );
+
+      expect(opcodes).toContain('class');
+      expect(opcodes).toContain(2);
+      expect(opcodes).toContain('raw-child');
+      expect(opcodes).toContain('keep');
+      expect(opcodes).not.toContain('key');
+      expect(opcodes).not.toContain('ref');
+      expect(opcodes).not.toContain('__self');
+      expect(opcodes).not.toContain('__source');
+      expect(opcodes).not.toContain('onTap');
+    } finally {
+      options[COMMIT] = previous[COMMIT];
+      options[DIFF] = previous[DIFF];
+      options[DIFF2] = previous[DIFF2];
+      options[DIFFED] = previous[DIFFED];
+      options[RENDER] = previous[RENDER];
+      options.unmount = previous.unmount;
+    }
   });
 
   it('should render Component depth 1', () => {
