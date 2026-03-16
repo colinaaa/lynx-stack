@@ -134,7 +134,7 @@ function onLifecycleEventImpl(type: LifecycleConstant, data: unknown): void {
 
         let idStr = handlerName.slice(0, i);
         while (jsReadyEventIdSwap[idStr]) idStr = String(jsReadyEventIdSwap[idStr]);
-        publishEvent(`${idStr}:${handlerName.slice(i + 1)}`, data);
+        publishEvent(idStr + handlerName.slice(i), data);
       }
       delayedEvents.length = 0;
 
