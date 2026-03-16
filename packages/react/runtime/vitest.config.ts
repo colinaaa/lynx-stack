@@ -100,6 +100,8 @@ export default defineConfig({
         'src/compat/componentIs.ts',
 
         '__test__/page.test.jsx',
+        '__test__/lifecycle/reloadBG.jsx',
+        '__test__/lifecycle/reloadMT.jsx',
         '**/*.d.ts',
         '**/*.test-d.*',
       ],
