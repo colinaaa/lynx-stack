@@ -10,7 +10,6 @@
 
 - `spread.ts` repetitive conditional refactor (implemented and validated).
 - `snapshot.ts` `takeElements` and update-call simplifications (implemented and validated).
-- `const enum` conversion for `SnapshotOperation` (tried; major size regression due enum runtime emit).
 - Remove pretty patch formatting dependency in `updateMainThread` ALOG path (tried; no size change).
 - `updateAttribute` event-regex branch reshaping in `spread.ts` (tried; no size change).
 - Hoist `__PROFILE__` check to local in `onLifecycleEvent` (tried; no size change).
@@ -24,4 +23,5 @@
 - `performance.ts` helper inlining into hook callback (tried; no size change).
 - `tt.ts` remap loop rewrite to cached `for` variable (tried; size regression).
 - `publishEvent` snapshot-id parse shape changes (tried; no size change).
-- Enum-scaffolding removals completed for `lifecycleConstant.ts`, `dynamicPartType.ts`, and local `Opcode` in `opcodes.ts` (large wins, path exhausted in runtime scope).
+- `opcodes.ts` end-case temp-variable removal (tried; no size change).
+- **Enum-emission removal path exhausted in runtime**: converted enum-like modules to `as const` objects where beneficial (`lifecycleConstant.ts`, `snapshot/dynamicPartType.ts`, `opcodes.ts` local opcode constants, `gesture/types.ts`) and verified wins.
