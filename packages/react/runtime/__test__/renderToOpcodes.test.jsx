@@ -1213,4 +1213,14 @@ describe('renderMainThread', () => {
       />
     `);
   });
+
+  it('should ignore __source on cloned vnode props in renderToString', () => {
+    const element = <view className='foo' />;
+    const cloned = cloneElement(element, {
+      __source: 'debug-only',
+    });
+
+    const opcodes = renderToString(cloned);
+    expect(opcodes).not.toContain('__source');
+  });
 });
