@@ -62,4 +62,30 @@ describe('updateMainThread delayed worklet error path', () => {
 
     expect(reportError).toHaveBeenCalledWith(err);
   });
+
+  it('should skip BTS->MTS ALog output when __ALOG__ is false', () => {
+    const originalAlogFlag = __ALOG__;
+    globalThis.__ALOG__ = false;
+    console.alog = vi.fn();
+
+    const updateMainThread = globalThis[LifecycleConstant.patchUpdate] as (payload: {
+      data: string;
+      patchOptions: {
+        reloadVersion: number;
+      };
+    }) => void;
+
+    try {
+      updateMainThread({
+        data: JSON.stringify({ patchList: [] }),
+        patchOptions: {
+          reloadVersion: 0,
+        },
+      });
+
+      expect(console.alog).not.toHaveBeenCalled();
+    } finally {
+      globalThis.__ALOG__ = originalAlogFlag;
+    }
+  });
 });
