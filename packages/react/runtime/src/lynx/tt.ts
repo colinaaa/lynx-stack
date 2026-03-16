@@ -130,10 +130,11 @@ function onLifecycleEventImpl(type: LifecycleConstant, data: unknown): void {
       // TODO: It seems `delayedEvents` and `delayedLifecycleEvents` should be merged into one array to ensure the proper order of events.
       flushDelayedLifecycleEvents();
       for (const [handlerName, data] of delayedEvents) {
-        // eslint-disable-next-line prefer-const
-        let [idStr, ...rest] = handlerName.split(':');
-        while (jsReadyEventIdSwap[idStr!]) idStr = jsReadyEventIdSwap[idStr!]?.toString();
-        publishEvent([idStr, ...rest].join(':'), data);
+        const i = handlerName.indexOf(':');
+
+        let idStr = handlerName.slice(0, i);
+        while (jsReadyEventIdSwap[idStr]) idStr = String(jsReadyEventIdSwap[idStr]);
+        publishEvent(`${idStr}:${handlerName.slice(i + 1)}`, data);
       }
       delayedEvents.length = 0;
 
