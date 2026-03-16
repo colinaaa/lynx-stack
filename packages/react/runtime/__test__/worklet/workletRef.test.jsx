@@ -155,6 +155,19 @@ describe('WorkletRef in js', () => {
     );
   });
 
+  it('should return undefined for current getter when __DEV__ is disabled', () => {
+    const prevDev = __DEV__;
+    // @ts-expect-error testing runtime flag branch
+    globalThis.__DEV__ = false;
+    globalEnvManager.switchToMainThread();
+
+    const ref = new MainThreadRef(1);
+    expect(ref.current).toBeUndefined();
+
+    // @ts-expect-error restore global test flag
+    globalThis.__DEV__ = prevDev;
+  });
+
   it('should throw when native capabilities not fulfilled', () => {
     globalEnvManager.switchToBackground();
     lynx.getCoreContext = undefined;
