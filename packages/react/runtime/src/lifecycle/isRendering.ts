@@ -17,7 +17,7 @@ const setIsRendering = () => {
 
 const onRenderHook = <T extends unknown[]>(old: ((...args: T) => void) | undefined, ...args: T) => {
   /* v8 ignore next */
-  old?.(...args);
+  if (old) old(...args);
   setIsRendering();
 };
 

@@ -132,7 +132,7 @@ function initTimingAPI(): void {
   const onHook = <T extends unknown[]>(old: ((...args: T) => void) | undefined, ...args: T) => {
     helper();
     /* v8 ignore start */
-    old?.(...args);
+    if (old) old(...args);
     /* v8 ignore stop */
   };
 
