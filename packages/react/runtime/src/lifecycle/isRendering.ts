@@ -12,9 +12,7 @@ export const isRendering = /* @__PURE__ */ { value: false };
 const setIsRendering = () => {
   isRendering.value = true;
   // Make sure `isRendering` is set to false even if an error is thrown during rendering
-  lynxQueueMicrotask(() => {
-    isRendering.value = false;
-  });
+  lynxQueueMicrotask(() => (isRendering.value = false));
 };
 
 const onRenderHook = <T extends unknown[]>(old: ((...args: T) => void) | undefined, ...args: T) => {
