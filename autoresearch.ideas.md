@@ -22,3 +22,5 @@
 - `destroy.ts` forEach-to-for-of conversion (tried; size regression).
 - `isRendering.ts` inlining set helper into callback (tried; no size change).
 - `performance.ts` helper inlining into hook callback (tried; no size change).
+- `tt.ts` remap loop rewrite to cached `for` variable (tried; size regression).
+- `publishEvent` snapshot-id cache removal (tried; no size change).
