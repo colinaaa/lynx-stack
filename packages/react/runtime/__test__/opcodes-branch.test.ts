@@ -1,8 +1,9 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { setupDocument } from '../src/document';
-import { renderOpcodesInto } from '../src/opcodes';
-import { setupPage, SnapshotInstance, snapshotInstanceManager } from '../src/snapshot';
+import { renderOpcodesInto, ssrHydrateByOpcodes } from '../src/opcodes';
+import { createSnapshot, setupPage, SnapshotInstance, snapshotInstanceManager } from '../src/snapshot';
+import { DynamicPartType } from '../src/snapshot/dynamicPartType';
 import { elementTree } from './utils/nativeMethod';
 
 describe('opcodes branch guards', () => {
@@ -34,5 +35,45 @@ describe('opcodes branch guards', () => {
     renderOpcodesInto(opcodes, scratch);
 
     expect(opcodes[1]).toBe('plain-text');
+  });
+
+  it('ssrHydrateByOpcodes should skip list child enqueue when child has no element root', () => {
+    const listType = '__test_ssr_list_holder__';
+    const childType = '__test_ssr_child__';
+
+    createSnapshot(
+      listType,
+      (ctx) => [__CreateList(ctx.__id)],
+      null,
+      [[DynamicPartType.ListChildren, 0]],
+      0,
+      undefined,
+      null,
+    );
+    createSnapshot(
+      childType,
+      (ctx) => [__CreateElement('view', ctx.__id)],
+      null,
+      [],
+      0,
+      undefined,
+      null,
+    );
+
+    const listElement = __CreateList(0);
+    const opcodes = [
+      0,
+      [listType, 100, [{ ssrID: 'list' }]],
+      0,
+      [childType, 101, [{ ssrID: 'missing-child' }]],
+      1,
+      1,
+    ];
+
+    ssrHydrateByOpcodes(opcodes, scratch, {
+      list: listElement,
+    } as never);
+
+    expect(scratch.childNodes[0]?.childNodes[0]?.__element_root).toBeUndefined();
   });
 });
