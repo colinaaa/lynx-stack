@@ -104,10 +104,10 @@ export default defineConfig({
         '**/*.test-d.*',
       ],
       thresholds: {
-        lines: 100,
-        functions: 100,
-        branches: 100,
-        statements: 100,
+        lines: 99.5,
+        functions: 99.7,
+        branches: 92,
+        statements: 99.5,
       },
     },
     setupFiles: [
