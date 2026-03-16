@@ -33,8 +33,26 @@ describe('Preview', () => {
     // Reset mocks explicitly to avoid cross-test pollution.
     vi.resetAllMocks()
     vi.unstubAllEnvs()
+    Object.defineProperty(process.stdin, 'isTTY', {
+      value: true,
+      configurable: true,
+    })
+    Object.defineProperty(process.stdout, 'isTTY', {
+      value: true,
+      configurable: true,
+    })
 
-    return () => vi.unstubAllEnvs()
+    return () => {
+      vi.unstubAllEnvs()
+      Object.defineProperty(process.stdin, 'isTTY', {
+        value: undefined,
+        configurable: true,
+      })
+      Object.defineProperty(process.stdout, 'isTTY', {
+        value: undefined,
+        configurable: true,
+      })
+    }
   })
 
   test('preview with NODE_ENV=development', async () => {
@@ -233,9 +251,6 @@ describe('Preview', () => {
           pluginStubRspeedyAPI(),
           pluginQRCode(),
         ],
-        environments: {
-          lynx: {},
-        },
         source: {
           entry: {},
         },

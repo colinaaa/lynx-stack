@@ -1,5 +1,31 @@
 # @lynx-js/rspeedy
 
+## 0.13.5
+
+### Patch Changes
+
+- feat: opt-in the web platform's new binary output format ([#2281](https://github.com/lynx-family/lynx-stack/pull/2281))
+
+  Introduce a new flag to enable the new binary output format.
+
+  Currently it's an internal-use-only flag that will be removed in the future; set the corresponding environment variable to 'true' to enable it.
+
+- Avoid generating `Rsbuild vundefined` in greeting message. ([#2275](https://github.com/lynx-family/lynx-stack/pull/2275))
+
+- Updated dependencies []:
+  - @lynx-js/web-rsbuild-server-middleware@0.19.8
+
+## 0.13.4
+
+### Patch Changes
+
+- Bump ts-blank-space v0.7.0 ([#2238](https://github.com/lynx-family/lynx-stack/pull/2238))
+
+- Bump Rsbuild v1.7.3 with Rspack v1.7.5. ([#2189](https://github.com/lynx-family/lynx-stack/pull/2189))
+
+- Updated dependencies []:
+  - @lynx-js/web-rsbuild-server-middleware@0.19.8
+
 ## 0.13.3
 
 ### Patch Changes

@@ -1,5 +1,51 @@
 # @lynx-js/react
 
+## 0.116.5
+
+### Patch Changes
+
+- Improve React runtime hook profiling. ([#2235](https://github.com/lynx-family/lynx-stack/pull/2235))
+  Enable Profiling recording first, then enter the target page so the trace includes full render/hydrate phases.
+
+  - Record trace events for `useEffect` / `useLayoutEffect` hook entry, callback, and cleanup phases.
+  - Log trace events for `useState` setter calls.
+  - Wire `profileFlowId` support in debug profile utilities and attach flow IDs to related hook traces.
+  - Instrument hydrate/background snapshot profiling around patch operations with richer args (e.g. snapshot id/type, dynamic part index, value type, and source when available).
+  - Capture vnode source mapping in dev and use it in profiling args to improve trace attribution.
+  - Expand debug test coverage for profile utilities, hook profiling behavior, vnode source mapping, and hydrate profiling branches.
+
+- refactor: call loadWorkletRuntime once in each module ([#2315](https://github.com/lynx-family/lynx-stack/pull/2315))
+
+## 0.116.4
+
+### Patch Changes
+
+- Support `ReactLynx::hooks::setState` trace for function components. ([#2198](https://github.com/lynx-family/lynx-stack/pull/2198))
+
+- fix: properly cleanup `__DestroyLifetime` listeners and listCallbacks in `snapshotDestroyList`. ([#2224](https://github.com/lynx-family/lynx-stack/pull/2224))
+
+## 0.116.3
+
+### Patch Changes
+
+- fix: remove `lynx.createSelectorQuery` deprecated warning in production ([#2195](https://github.com/lynx-family/lynx-stack/pull/2195))
+
+- Add a DEV-only guard that detects MainThread flush loops caused by re-entrant MTS handlers. ([#2159](https://github.com/lynx-family/lynx-stack/pull/2159))
+
+  This typically happens when a MainThread handler (e.g. event callback or `MainThreadRef`) performs UI mutations (like `Element.setStyleProperty`, `setStyleProperties`, `setAttribute`, or `invoke`) that synchronously trigger a flush which re-enters the handler again.
+
+- Avoid DEV_ONLY_SetSnapshotEntryName on standalone lazy bundle. ([#2184](https://github.com/lynx-family/lynx-stack/pull/2184))
+
+- Add alog and trace for BTS event handlers. ([#2102](https://github.com/lynx-family/lynx-stack/pull/2102))
+
+- fix: Main thread functions cannot access properties on `this` before hydration completes. ([#2194](https://github.com/lynx-family/lynx-stack/pull/2194))
+
+  This fixes the `cannot convert to object` error.
+
+- Remove element api calls alog by default, and only enable it when `__ALOG_ELEMENT_API__` is defined to `true` or environment variable `REACT_ALOG_ELEMENT_API` is set to `true`. ([#2192](https://github.com/lynx-family/lynx-stack/pull/2192))
+
+- fix: captured variables in main thread functions within class components do not update correctly ([#2197](https://github.com/lynx-family/lynx-stack/pull/2197))
+
 ## 0.116.2
 
 ### Patch Changes

@@ -96,7 +96,7 @@ jobs:
       run: |
         export NODE_OPTIONS="--max-old-space-size=32768"
         export PLAYWRIGHT_JUNIT_OUTPUT_NAME=test-report.junit.xml
-        pnpm --filter @lynx-js/web-elements run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/4
+        pnpm --filter @lynx-js/web-elements run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/2
         pnpm --filter @lynx-js/web-elements run coverage:ci
   playwright-linux:
     needs: build
@@ -127,7 +127,7 @@ jobs:
         fi
         export NODE_OPTIONS="--max-old-space-size=32768"
         export PLAYWRIGHT_JUNIT_OUTPUT_NAME=test-report.junit.xml
-        pnpm --filter @lynx-js/web-tests run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/4
+        pnpm --filter @lynx-js/web-tests run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/3
         pnpm --filter @lynx-js/web-tests run coverage:ci
   web-core-wasm-e2e:
     needs: build
@@ -152,7 +152,7 @@ jobs:
         fi
         export NODE_OPTIONS="--max-old-space-size=32768"
         export PLAYWRIGHT_JUNIT_OUTPUT_NAME=test-report.junit.xml
-        pnpm --filter @lynx-js/web-core-wasm-e2e run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/4
+        pnpm --filter @lynx-js/web-core-wasm-e2e run test --reporter='github,dot,junit,html' --shard=${{ matrix.shard }}/2
   test-api:
     needs: build
     uses: ./.github/workflows/workflow-test.yml
@@ -245,8 +245,8 @@ jobs:
   test-typos:
     runs-on: lynx-ubuntu-24.04-medium
     steps:
-      - uses: taiki-e/checkout-action@b13d20b7cda4e2f325ef19895128f7ff735c0b3d # v1.3.1
-      - uses: crate-ci/typos@2d0ce569feab1f8752f1dde43cc2f2aa53236e06 # v1.40.0
+      - uses: taiki-e/checkout-action@3ab630d442e198ebb0ca30872832406ca01c46eb # v1.4.0
+      - uses: crate-ci/typos@57b11c6b7e54c402ccd9cda953f1072ec4f78e33 # v1.43.5
         with:
           files: .
   test-vitest:
@@ -259,7 +259,7 @@ jobs:
           - name: Ubuntu
             label: lynx-ubuntu-24.04-medium
           - name: Windows
-            label: lynx-windows-2022-large-verify
+            label: lynx-windows-2022-large
     name: Vitest (${{ matrix.runs-on.name }})
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -297,6 +297,7 @@ jobs:
       - test-type
       - test-typos
       - test-vitest
+      - web-core-wasm-e2e
       - website
     if: always()
     runs-on: ubuntu-latest

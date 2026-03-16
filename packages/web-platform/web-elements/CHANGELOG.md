@@ -1,5 +1,41 @@
 # @lynx-js/web-elements
 
+## 0.12.0
+
+### Minor Changes
+
+- feat: add `willchange` event to `x-viewpager-ng` ([#2305](https://github.com/lynx-family/lynx-stack/pull/2305))
+
+### Patch Changes
+
+- fix: firefox `@supports(width:1rex)` ([#2288](https://github.com/lynx-family/lynx-stack/pull/2288))
+
+- fix: check computed overflow style in `getTheMostScrollableKid` to avoid treating `overflow: visible` elements as scroll containers ([#2309](https://github.com/lynx-family/lynx-stack/pull/2309))
+
+- fix: the inline-truncation should only work as a direct child of x-text ([#2287](https://github.com/lynx-family/lynx-stack/pull/2287))
+
+- fix: getVisibleCells cannot work in firefox due to contentvisibilityautostatechange not propagate list-item ([#2308](https://github.com/lynx-family/lynx-stack/pull/2308))
+
+- fix: foldview stuck issue ([#2304](https://github.com/lynx-family/lynx-stack/pull/2304))
+
+## 0.11.3
+
+### Patch Changes
+
+- fix: firefox 147+ layout issue ([#2205](https://github.com/lynx-family/lynx-stack/pull/2205))
+
+## 0.11.2
+
+### Patch Changes
+
+- Add scrollHeight/scrollWidth getters to XList. ([#2156](https://github.com/lynx-family/lynx-stack/pull/2156))
+
+- Inherit padding styles for x-input elements. ([#2199](https://github.com/lynx-family/lynx-stack/pull/2199))
+
+- Remove the default lazy-loading attribute from x-image elements. ([#2186](https://github.com/lynx-family/lynx-stack/pull/2186))
+
+- Fix x-input number type forwarding to the inner input element. ([#2193](https://github.com/lynx-family/lynx-stack/pull/2193))
+
 ## 0.11.1
 
 ### Patch Changes

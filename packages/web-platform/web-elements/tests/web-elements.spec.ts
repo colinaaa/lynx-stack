@@ -173,6 +173,13 @@ test.describe('web-elements test suite', () => {
       await diffScreenShot(page, title, 'index');
     });
     test(
+      'x-text/text-maxline-truncation-in-view',
+      async ({ page }, { title }) => {
+        await gotoWebComponentPage(page, title);
+        await diffScreenShot(page, title, 'index');
+      },
+    );
+    test(
       'x-text/inline-image-with-lynx-wrapper',
       async ({ page }, { title }) => {
         await gotoWebComponentPage(page, title);
@@ -1393,6 +1400,37 @@ test.describe('web-elements test suite', () => {
     );
 
     test(
+      'x-viewpager-ng/event-willchange',
+      async ({ page, browserName, context }, {
+        title,
+      }) => {
+        test.skip(browserName !== 'chromium', 'cannot swipe');
+        await gotoWebComponentPage(page, title);
+        const willchangeEventValue = await page
+          .locator('#target')
+          .evaluateHandle((target) => {
+            let detail = { index: -1 };
+            target.addEventListener('willchange', (e) => {
+              detail.index = (e as any).detail.index;
+            });
+            return detail;
+          });
+        const cdpSession = await context.newCDPSession(page);
+        let touchRelease = await dragAndHold(cdpSession, {
+          x: 190,
+          y: 100,
+          xDistance: -150,
+          yDistance: 0,
+        });
+        await wait(500);
+        await touchRelease();
+        await wait(1000);
+        const index = (await willchangeEventValue.jsonValue()).index;
+        expect(index).toBe(1);
+      },
+    );
+
+    test(
       'x-viewpager-ng/selecttab-method-not-smooth',
       async ({ page, browserName, context }, {
         title,
@@ -2123,8 +2161,6 @@ test.describe('web-elements test suite', () => {
     test(
       'get-visible-cells',
       async ({ page, browserName }, { titlePath }) => {
-        // contentvisibilityautostatechange not propagate
-        if (browserName === 'webkit' || browserName === 'firefox') test.skip(); // cannot wheel
         const title = getTitle(titlePath);
         await gotoWebComponentPage(page, title);
         await wait(1000);
@@ -2136,7 +2172,7 @@ test.describe('web-elements test suite', () => {
           });
         const data = await cells.jsonValue();
         expect(
-          Array.isArray(data),
+          Array.isArray(data) && data.length > 0,
         ).toBeTruthy();
       },
     );
@@ -2947,6 +2983,14 @@ test.describe('web-elements test suite', () => {
     );
     test(
       'style-inherit-margin',
+      async ({ page }, { titlePath }) => {
+        const title = getTitle(titlePath);
+        await gotoWebComponentPage(page, title);
+        await diffScreenShot(page, title, 'initial');
+      },
+    );
+    test(
+      'style-inherit-padding',
       async ({ page }, { titlePath }) => {
         const title = getTitle(titlePath);
         await gotoWebComponentPage(page, title);

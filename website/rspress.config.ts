@@ -384,6 +384,7 @@ const CHANGELOG_ZH = {
 
 const config: UserConfig = defineConfig({
   root: 'docs',
+  llms: true,
   lang: 'en',
   title: 'Lynx Stack',
   description: 'A collection of tools for building Lynx applications',
@@ -717,6 +718,10 @@ const config: UserConfig = defineConfig({
         link: '/guide/installation',
       },
       {
+        text: 'REPL',
+        link: '/repl',
+      },
+      {
         text: 'API',
         items: [
           {
@@ -791,6 +796,6 @@ const config: UserConfig = defineConfig({
       pluginSass(),
     ],
   },
-});
+} as unknown as UserConfig);
 
 export default config;

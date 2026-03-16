@@ -1,7 +1,8 @@
+packages/repl/** @huxpro
 packages/web-platform/** @pupiltong @Sherry-hue
 packages/webpack/** @colinaaa @upupming @luhc228
 packages/rspeedy/** @colinaaa @upupming @luhc228
 packages/rspeedy/plugin-react/** @upupming
-packages/react/** @hzy @HuJean
+packages/react/** @hzy @HuJean @Yradex
 packages/react/transform/** @gaoachao
 benchmark/react/** @hzy @HuJean

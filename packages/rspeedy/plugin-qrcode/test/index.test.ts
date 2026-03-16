@@ -40,8 +40,26 @@ describe('Plugins - Terminal', () => {
     vi.unstubAllEnvs()
     vi.stubEnv('NODE_ENV', 'production')
     vi.mocked(isCancel).mockReturnValue(true)
+    Object.defineProperty(process.stdin, 'isTTY', {
+      value: true,
+      configurable: true,
+    })
+    Object.defineProperty(process.stdout, 'isTTY', {
+      value: true,
+      configurable: true,
+    })
 
-    return () => vi.unstubAllEnvs()
+    return () => {
+      vi.unstubAllEnvs()
+      Object.defineProperty(process.stdin, 'isTTY', {
+        value: undefined,
+        configurable: true,
+      })
+      Object.defineProperty(process.stdout, 'isTTY', {
+        value: undefined,
+        configurable: true,
+      })
+    }
   })
 
   describe('schema', () => {
