@@ -1,5 +1,6 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
+import { createElement } from '../lepus';
 import { setupDocument } from '../src/document';
 import { renderOpcodesInto, ssrHydrateByOpcodes } from '../src/opcodes';
 import { createSnapshot, setupPage, SnapshotInstance, snapshotInstanceManager } from '../src/snapshot';
@@ -75,5 +76,22 @@ describe('opcodes branch guards', () => {
     } as never);
 
     expect(scratch.childNodes[0]?.childNodes[0]?.__element_root).toBeUndefined();
+  });
+
+  it('createElement should preserve explicitly provided props when defaultProps exist', () => {
+    const Counter = (() => null) as ((props: { count?: number; label?: string }) => null) & {
+      defaultProps?: { count: number; label: string };
+    };
+    Counter.defaultProps = {
+      count: 1,
+      label: 'fallback',
+    };
+
+    const vnode = createElement(Counter, {
+      count: 2,
+    });
+
+    expect(vnode.props.count).toBe(2);
+    expect(vnode.props.label).toBe('fallback');
   });
 });
