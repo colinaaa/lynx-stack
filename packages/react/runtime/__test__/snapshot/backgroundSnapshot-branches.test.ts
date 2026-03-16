@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { BackgroundSnapshotInstance } from '../../src/backgroundSnapshot';
+import { BackgroundSnapshotInstance, hydrate } from '../../src/backgroundSnapshot';
 import { setPipeline, globalPipelineOptions } from '../../src/lynx/performance';
 import { snapshotManager } from '../../src/snapshot';
 import { initGlobalSnapshotPatch, deinitGlobalSnapshotPatch } from '../../src/lifecycle/patch/snapshotPatch';
@@ -175,6 +175,32 @@ describe('BackgroundSnapshotInstance branches', () => {
 
     const inst = new BackgroundSnapshotInstance(TAG);
     expect(() => inst.setAttribute('values', [{ __ltf: 'x' }])).not.toThrow();
+  });
+
+  it('hydrates spread gesture values via __isGesture path', () => {
+    const gesture = {
+      __isGesture: true,
+      type: 0,
+      callbacks: {
+        onUpdate: { _wkltId: 'gesture:1' },
+      },
+    } as any;
+
+    const after = new BackgroundSnapshotInstance(TAG);
+    after.setAttribute('values', [{
+      __spread: {},
+      'main-thread:gesture': gesture,
+      style: { width: 100 },
+    }]);
+
+    const before = {
+      id: after.__id,
+      type: TAG,
+      values: [{}],
+      children: [],
+    } as any;
+
+    expect(() => hydrate(before, after)).not.toThrow();
   });
 
   it('throws when creating unknown snapshot type', () => {
