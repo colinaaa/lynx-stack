@@ -6,14 +6,17 @@ Increase measured test coverage for `@lynx-js/react-runtime` while keeping the p
 
 ## Metrics
 
-- **Primary**: `coverage_lines_pct` (%, higher is better)
-- **Secondary**: test duration (s), pass/fail status for required checks
+- **Primary**: `coverage_branches_pct` (%, higher is better)
+- **Secondary**: `coverage_lines_pct`, `coverage_statements_pct`, `coverage_functions_pct`, test duration (s), pass/fail status for required checks
 
 ## How to Run
 
 `./autoresearch.sh` — runs the package tests and prints:
 
+- `METRIC coverage_branches_pct=<number>`
 - `METRIC coverage_lines_pct=<number>`
+- `METRIC coverage_statements_pct=<number>`
+- `METRIC coverage_functions_pct=<number>`
 
 ## Files in Scope
 
@@ -35,3 +38,4 @@ Increase measured test coverage for `@lynx-js/react-runtime` while keeping the p
 - Initial baseline with the package `test` script failed due strict global thresholds (`lines 99.53%`, `branches 92.06%`), so benchmark runner now disables thresholds only for metric collection.
 - Correctness guard remains in `autoresearch.checks.sh`, which enforces `pnpm build` and `pnpm --filter @lynx-js/react-runtime test`.
 - Next: identify low/zero-covered modules within `packages/react/runtime/src/**` and add focused tests under `packages/react/runtime/__test__/**`.
+- After line coverage saturated at 100 with current include/exclude policy, shift optimization focus to branch coverage improvements while keeping line coverage high and avoiding benchmark overfitting.

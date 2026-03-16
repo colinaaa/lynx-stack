@@ -13,13 +13,18 @@ pnpm --filter @lynx-js/react-runtime exec vitest run --coverage \
   --coverage.thresholds.statements=0 \
   --coverage.thresholds.branches=0
 
-# Extract primary metric from coverage summary
+# Extract metrics from coverage summary
 COV_FILE="packages/react/runtime/coverage/coverage-summary.json"
 if [ ! -f "$COV_FILE" ]; then
   echo "coverage summary not found: $COV_FILE" >&2
   exit 1
 fi
 
-COVERAGE=$(node -e "const fs=require('fs');const p=process.argv[1];const d=JSON.parse(fs.readFileSync(p,'utf8'));process.stdout.write(String(d.total.lines.pct));" "$COV_FILE")
+read -r LINES BRANCHES STATEMENTS FUNCTIONS < <(
+  node -e "const fs=require('fs');const p=process.argv[1];const d=JSON.parse(fs.readFileSync(p,'utf8')).total;console.log([d.lines.pct,d.branches.pct,d.statements.pct,d.functions.pct].join(' '));" "$COV_FILE"
+)
 
-echo "METRIC coverage_lines_pct=$COVERAGE"
+echo "METRIC coverage_branches_pct=$BRANCHES"
+echo "METRIC coverage_lines_pct=$LINES"
+echo "METRIC coverage_statements_pct=$STATEMENTS"
+echo "METRIC coverage_functions_pct=$FUNCTIONS"
