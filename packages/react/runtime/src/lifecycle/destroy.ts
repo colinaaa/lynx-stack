@@ -17,9 +17,7 @@ function destroyBackground(): void {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   render(null, __root as any);
 
-  globalCommitTaskMap.forEach(task => {
-    task();
-  });
+  globalCommitTaskMap.forEach(task => task());
   globalCommitTaskMap.clear();
   // Clear delayed events which should not be executed after destroyed.
   // This is important when the page is performing a reload.
