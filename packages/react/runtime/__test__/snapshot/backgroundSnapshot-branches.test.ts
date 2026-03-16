@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BackgroundSnapshotInstance } from '../../src/backgroundSnapshot';
 import { setPipeline, globalPipelineOptions } from '../../src/lynx/performance';
 import { snapshotManager } from '../../src/snapshot';
@@ -8,6 +8,7 @@ import { applyQueuedRefs } from '../../src/snapshot/ref';
 describe('BackgroundSnapshotInstance branches', () => {
   // Use a unique tag to avoid conflict with other tests
   const TAG = 'view-perf-test';
+  let originalProfile: boolean | undefined;
 
   beforeAll(() => {
     // Register a dummy snapshot definition
@@ -18,9 +19,16 @@ describe('BackgroundSnapshotInstance branches', () => {
     snapshotManager.values.delete(TAG);
   });
 
+  beforeEach(() => {
+    // @ts-expect-error test runtime flag
+    originalProfile = globalThis.__PROFILE__;
+  });
+
   afterEach(() => {
     setPipeline(undefined);
     deinitGlobalSnapshotPatch();
+    // @ts-expect-error restore runtime flag
+    globalThis.__PROFILE__ = originalProfile;
     vi.restoreAllMocks();
   });
 
@@ -131,6 +139,42 @@ describe('BackgroundSnapshotInstance branches', () => {
     } finally {
       snapshotManager.values.delete(REF_TAG);
     }
+  });
+
+  it('handles removeChild ref traversal fallback branches', () => {
+    initGlobalSnapshotPatch();
+
+    const REF_TAG = 'view-with-mixed-ref-values';
+    snapshotManager.values.set(REF_TAG, {
+      slot: [],
+      refAndSpreadIndexes: [0, 1],
+    } as any);
+
+    try {
+      const parent = new BackgroundSnapshotInstance(TAG);
+      const child = new BackgroundSnapshotInstance(REF_TAG);
+      parent.appendChild(child);
+
+      // index 0 => primitive, should hit the false branch of object/function guard
+      // index 1 => object without __ref and with falsy spread ref, should hit else-if false branch
+      child.setAttribute('values', [0, { __spread: {}, ref: null }]);
+
+      parent.removeChild(child);
+      applyQueuedRefs();
+
+      expect(child.__parent).toBeNull();
+    } finally {
+      snapshotManager.values.delete(REF_TAG);
+    }
+  });
+
+  it('setAttribute values should skip profileEnd branch when __PROFILE__ is false', () => {
+    initGlobalSnapshotPatch();
+    // @ts-expect-error test runtime flag
+    globalThis.__PROFILE__ = false;
+
+    const inst = new BackgroundSnapshotInstance(TAG);
+    expect(() => inst.setAttribute('values', [{ __ltf: 'x' }])).not.toThrow();
   });
 
   it('throws when creating unknown snapshot type', () => {
