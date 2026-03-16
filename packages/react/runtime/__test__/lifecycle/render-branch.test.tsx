@@ -9,6 +9,7 @@ import { elementTree } from '../utils/nativeMethod';
 describe('lifecycle/render branch guards', () => {
   const originalProfileFlag = __PROFILE__;
   const originalEnableSSR = __ENABLE_SSR__;
+  const originalNodeEnv = process.env.NODE_ENV;
 
   beforeAll(() => {
     setupPage(__CreatePage('0', 0));
@@ -24,6 +25,7 @@ describe('lifecycle/render branch guards', () => {
     globalThis.__PROFILE__ = originalProfileFlag;
     // @ts-expect-error restore globals used in branch tests
     globalThis.__ENABLE_SSR__ = originalEnableSSR;
+    process.env.NODE_ENV = originalNodeEnv;
     elementTree.clear();
   });
 
@@ -53,5 +55,18 @@ describe('lifecycle/render branch guards', () => {
     renderMainThread();
 
     expect(__root.__opcodes).toEqual(['sentinel']);
+  });
+
+  it('should render successfully when NODE_ENV is not test', () => {
+    // @ts-expect-error test branch flag
+    globalThis.__PROFILE__ = false;
+    // @ts-expect-error test branch flag
+    globalThis.__ENABLE_SSR__ = true;
+    process.env.NODE_ENV = 'production';
+
+    __root.__jsx = <view /> as never;
+
+    expect(() => renderMainThread()).not.toThrow();
+    expect(__root.__opcodes.length).toBeGreaterThan(0);
   });
 });
