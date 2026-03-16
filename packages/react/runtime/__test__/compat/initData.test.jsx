@@ -150,4 +150,30 @@ describe('withInitDataInState', () => {
       }
     `);
   });
+
+  it('should skip initData listener wiring when __LEPUS__ is true', () => {
+    const originalLepus = __LEPUS__;
+    globalThis.__LEPUS__ = true;
+
+    const emitter = lynx.getJSModule('GlobalEventEmitter');
+    const addListenerSpy = vi.spyOn(emitter, 'addListener');
+    const removeListenerSpy = vi.spyOn(emitter, 'removeListener');
+
+    class LepusApp extends Component {
+      render() {
+        return <view />;
+      }
+    }
+
+    const Wrapped = withInitDataInState(LepusApp);
+    const instance = new Wrapped({});
+
+    try {
+      instance.componentWillUnmount();
+      expect(addListenerSpy).not.toHaveBeenCalled();
+      expect(removeListenerSpy).not.toHaveBeenCalled();
+    } finally {
+      globalThis.__LEPUS__ = originalLepus;
+    }
+  });
 });
