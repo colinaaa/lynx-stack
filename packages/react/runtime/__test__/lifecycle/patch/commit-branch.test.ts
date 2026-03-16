@@ -5,6 +5,7 @@ import {
   commitPatchUpdate,
   replaceCommitHook,
   globalBackgroundSnapshotInstancesToRemove,
+  globalCommitTaskMap,
   globalFlushOptions,
 } from '../../../src/lifecycle/patch/commit';
 import { delayedRunOnMainThreadData } from '../../../src/worklet/call/delayedRunOnMainThreadData';
@@ -97,6 +98,33 @@ describe('lifecycle/patch/commit branch guards', () => {
     globalThis.__MAIN_THREAD__ = true;
   });
 
+  it('replaceCommitHook should omit delayedRunOnMainThreadData when queue is empty', () => {
+    // @ts-ignore
+    globalThis.__MAIN_THREAD__ = false;
+
+    replaceCommitHook();
+    const commitHook = options[COMMIT];
+
+    const instance = new BackgroundSnapshotInstance('view');
+    instance.setAttribute('id', 'without-delayed');
+    delayedRunOnMainThreadData.length = 0;
+
+    const callLepusMethod = lynx.getNativeApp().callLepusMethod;
+    callLepusMethod.mockClear();
+
+    // @ts-ignore
+    commitHook!(null, []);
+
+    const args = callLepusMethod.mock.calls[0];
+    const obj = args![1] as any;
+    const data = JSON.parse(obj.data);
+
+    expect(data.delayedRunOnMainThreadData).toBeUndefined();
+
+    // @ts-ignore
+    globalThis.__MAIN_THREAD__ = true;
+  });
+
   it('commitPatchUpdate should include pipeline options if set', () => {
     setPipeline({ needTimestamps: true });
 
@@ -167,6 +195,26 @@ describe('lifecycle/patch/commit branch guards', () => {
     // It should not throw.
 
     vi.useRealTimers();
+  });
+
+  it('commit callback should handle missing commitTask entry', () => {
+    // @ts-ignore
+    globalThis.__MAIN_THREAD__ = false;
+
+    replaceCommitHook();
+    const commitHook = options[COMMIT];
+
+    const instance = new BackgroundSnapshotInstance('view');
+    instance.setAttribute('id', 'drop-task-before-callback');
+
+    const callLepusMethod = lynx.getNativeApp().callLepusMethod;
+    callLepusMethod.mockImplementation((method, obj, cb) => {
+      globalCommitTaskMap.clear();
+      cb && cb();
+    });
+
+    // @ts-ignore
+    expect(() => commitHook!(null, [])).not.toThrow();
   });
 
   it('commitHook should return early if snapshotPatch is null (before hydration)', () => {
