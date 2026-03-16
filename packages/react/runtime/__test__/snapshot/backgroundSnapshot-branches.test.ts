@@ -1,0 +1,149 @@
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { BackgroundSnapshotInstance } from '../../src/backgroundSnapshot';
+import { setPipeline, globalPipelineOptions } from '../../src/lynx/performance';
+import { snapshotManager } from '../../src/snapshot';
+import { initGlobalSnapshotPatch, deinitGlobalSnapshotPatch } from '../../src/lifecycle/patch/snapshotPatch';
+import { applyQueuedRefs } from '../../src/snapshot/ref';
+
+describe('BackgroundSnapshotInstance branches', () => {
+  // Use a unique tag to avoid conflict with other tests
+  const TAG = 'view-perf-test';
+
+  beforeAll(() => {
+    // Register a dummy snapshot definition
+    snapshotManager.values.set(TAG, { slot: [] } as any);
+  });
+
+  afterAll(() => {
+    snapshotManager.values.delete(TAG);
+  });
+
+  afterEach(() => {
+    setPipeline(undefined);
+    deinitGlobalSnapshotPatch();
+    vi.restoreAllMocks();
+  });
+
+  it('sets needTimestamps when __ltf changes in setAttribute values', () => {
+    initGlobalSnapshotPatch();
+    const pipeline = {
+      pipelineID: 'test-pipe-1',
+      needTimestamps: false,
+    } as any;
+    setPipeline(pipeline);
+
+    const inst = new BackgroundSnapshotInstance(TAG);
+
+    // Case 1: Initial set with __ltf
+    // value must be an object containing __ltf
+    const val1 = { __ltf: 'a' };
+    inst.setAttribute('values', [val1]);
+
+    // (undefined)?.__ltf != 'a' -> true
+    expect(pipeline.needTimestamps).toBe(true);
+
+    // Reset flag to verify change detection
+    pipeline.needTimestamps = false;
+
+    // Case 2: Update with same __ltf -> no change
+    const val2 = { __ltf: 'a' };
+    inst.setAttribute('values', [val2]);
+    expect(pipeline.needTimestamps).toBe(false);
+
+    // Case 3: Update with different __ltf -> change
+    const val3 = { __ltf: 'b' };
+    inst.setAttribute('values', [val3]);
+    expect(pipeline.needTimestamps).toBe(true);
+  });
+
+  it('sets needTimestamps when __spread contains __lynx_timing_flag change', () => {
+    initGlobalSnapshotPatch();
+    const pipeline = {
+      pipelineID: 'test-pipe-2',
+      needTimestamps: false,
+    } as any;
+    setPipeline(pipeline);
+
+    const inst = new BackgroundSnapshotInstance(TAG);
+
+    // Case 1: Initial spread with timing flag
+    // The object must have __spread property to trigger the spread logic path,
+    // AND the properties must be at the top level for transformSpread to pick them up.
+    const spread1 = { __spread: {}, __lynx_timing_flag: 'x' };
+    inst.setAttribute('values', [spread1]);
+
+    expect(pipeline.needTimestamps).toBe(true);
+
+    pipeline.needTimestamps = false;
+
+    // Case 2: Update with same timing flag -> no change
+    // Note: setAttributeImpl logic:
+    // const oldSpread = ...?.__spread;
+    // ...
+    // newValueObj['__spread'] = newSpread;
+    // ...
+    // if (key == '__lynx_timing_flag' && oldSpread?.[key] != newSpreadValue ...)
+
+    // We need to pass a new object, but logically same content.
+    const spread2 = { __spread: {}, __lynx_timing_flag: 'x' };
+    inst.setAttribute('values', [spread2]);
+    expect(pipeline.needTimestamps).toBe(false);
+
+    // Case 3: Update with different timing flag -> change
+    const spread3 = { __spread: {}, __lynx_timing_flag: 'y' };
+    inst.setAttribute('values', [spread3]);
+    expect(pipeline.needTimestamps).toBe(true);
+  });
+
+  it('queues ref cleanup when removeChild is called', () => {
+    initGlobalSnapshotPatch();
+
+    // Setup snapshot definition with ref index pointing to index 0
+    const REF_TAG = 'view-with-ref';
+    snapshotManager.values.set(REF_TAG, {
+      slot: [],
+      refAndSpreadIndexes: [0],
+    } as any);
+
+    try {
+      const parent = new BackgroundSnapshotInstance(TAG);
+      const child = new BackgroundSnapshotInstance(REF_TAG);
+
+      parent.appendChild(child);
+
+      // Create a mock ref function
+      const refFn = vi.fn();
+      // Mark it as a ref (transformRef usually does this)
+      Object.defineProperty(refFn, '__ref', { value: 1 });
+
+      // Set the ref value on the child
+      child.setAttribute('values', [refFn]);
+
+      // Remove the child
+      parent.removeChild(child);
+
+      // Verify that the cleanup callback was queued and executed
+      // applyQueuedRefs executes the queued ref callbacks
+      applyQueuedRefs();
+
+      // The cleanup should call the ref with null
+      expect(refFn).toHaveBeenCalledWith(null);
+    } finally {
+      snapshotManager.values.delete(REF_TAG);
+    }
+  });
+
+  it('throws when creating unknown snapshot type', () => {
+    expect(() => {
+      new BackgroundSnapshotInstance('unknown-type');
+    }).toThrow('BackgroundSnapshot not found: unknown-type');
+  });
+
+  it('throws when removing non-child node', () => {
+    const parent = new BackgroundSnapshotInstance(TAG);
+    const orphan = new BackgroundSnapshotInstance(TAG);
+    expect(() => {
+      parent.removeChild(orphan);
+    }).toThrow('The node to be removed is not a child of this node.');
+  });
+});

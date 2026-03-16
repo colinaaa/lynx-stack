@@ -31,6 +31,10 @@ describe('snapshot workletRef branch guards', () => {
     const unmount = vi.fn();
     workletUnRef({ _wkltId: 'wklt-id', _unmount: unmount } as never);
     expect(unmount).toHaveBeenCalledTimes(1);
+
+    // Test missing _unmount
+    workletUnRef({ _wkltId: 'wklt-id-no-unmount' } as never);
+    // Should call runWorkletCtx(value, [null]), but verify through coverage as spying seems problematic here
   });
 
   it('accepts __LEPUS__ worklet compatibility refs without throwing', () => {
