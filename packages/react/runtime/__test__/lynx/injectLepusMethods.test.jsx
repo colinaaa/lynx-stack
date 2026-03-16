@@ -1,6 +1,6 @@
 import { Component, h, options, render } from 'preact';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { setupPage } from '../../src/snapshot';
+import { setupPage, snapshotInstanceManager } from '../../src/snapshot';
 import { globalEnvManager } from '../utils/envManager';
 import { elementTree, waitSchedule } from '../utils/nativeMethod';
 import { __root } from '../../src/root';
@@ -21,6 +21,17 @@ afterEach(() => {
 });
 
 describe('setState timing api', () => {
+  it('should skip snapshot entries without elements when searching by unique id', () => {
+    injectLepusMethods();
+
+    snapshotInstanceManager.values.set(-999, {
+      __id: -999,
+      __elements: undefined,
+    });
+
+    expect(getSnapshotIdByUniqueId({ uniqueId: 123456 })).toBeNull();
+  });
+
   it('basic', async function() {
     let comp;
     class Comp extends Component {
