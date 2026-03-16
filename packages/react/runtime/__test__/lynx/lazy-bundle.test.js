@@ -238,6 +238,19 @@ describe('loadLazyBundle', () => {
       expect.assertions(3);
     });
 
+    test('blocking QueryComponent should reject when exports are missing despite code=0', async () => {
+      QueryComponent.mockImplementation((source, callback) => {
+        callback({ code: 0, detail: { schema: source } });
+      });
+      getDynamicComponentExports.mockReturnValueOnce(undefined);
+
+      const { loadLazyBundle } = await import('../../src/lynx/lazy-bundle');
+
+      const promise = loadLazyBundle('foo');
+
+      await expect(promise).rejects.toThrow('Lazy bundle load failed, schema: foo');
+    });
+
     test('blocking QueryComponent with error', async () => {
       QueryComponent.mockImplementation((source, callback) => {
         callback({ code: 1, detail: { errMsg: 'error', schema: source } });
