@@ -77,7 +77,7 @@ function updateAttribute(
     __SetClasses(snapshot.__elements![elementIndex]!, (value ?? '') as string);
   } else if (key === 'style') {
     if (!isDirectOrDeepEqual(value, oldValue)) {
-      __SetInlineStyles(snapshot.__elements![elementIndex]!, value);
+      __SetInlineStyles(snapshot.__elements![elementIndex]!, value ?? '');
     }
   } else if (key === 'id') {
     __SetID(snapshot.__elements![elementIndex]!, (value ?? null) as string);
