@@ -23,4 +23,5 @@
 - `isRendering.ts` inlining set helper into callback (tried; no size change).
 - `performance.ts` helper inlining into hook callback (tried; no size change).
 - `tt.ts` remap loop rewrite to cached `for` variable (tried; size regression).
-- `publishEvent` snapshot-id cache removal (tried; no size change).
+- `publishEvent` snapshot-id parse shape changes (tried; no size change).
+- Enum-scaffolding removals completed for `lifecycleConstant.ts`, `dynamicPartType.ts`, and local `Opcode` in `opcodes.ts` (large wins, path exhausted in runtime scope).
