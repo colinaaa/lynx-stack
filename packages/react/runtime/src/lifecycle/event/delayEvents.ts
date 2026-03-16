@@ -3,8 +3,8 @@
 // LICENSE file in the root directory of this source tree.
 const delayedEvents: [handlerName: string, data: EventDataType][] = [];
 
-function delayedPublishEvent(handlerName: string, data: EventDataType): void {
+const delayedPublishEvent = (handlerName: string, data: EventDataType): void => {
   delayedEvents.push([handlerName, data]);
-}
+};
 
 export { delayedPublishEvent, delayedEvents };
