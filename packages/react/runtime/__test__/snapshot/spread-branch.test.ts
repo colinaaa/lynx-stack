@@ -43,6 +43,25 @@ describe('snapshot/spread branch coverage', () => {
     __pendingListUpdates.values = originalValues;
   });
 
+  it('skips list-holder platform-info work when old/new platform info are equal', () => {
+    const list = {
+      __id: 1,
+      __snapshot_def: { isListHolder: true },
+    } as any;
+
+    const snapshot = {
+      __id: 2,
+      __values: { 0: { 'item-key': 'same' } },
+      __elements: [{ props: {} }],
+      parentNode: list,
+      __listItemPlatformInfo: { 'item-key': 'same' },
+    } as any;
+
+    updateSpread(snapshot, 0, { 'item-key': 'same' }, 0);
+
+    expect(snapshot.__listItemPlatformInfo).toEqual({ 'item-key': 'same' });
+  });
+
   it('handles style update with deep equality check', () => {
     const snapshot = {
       __id: 1,
