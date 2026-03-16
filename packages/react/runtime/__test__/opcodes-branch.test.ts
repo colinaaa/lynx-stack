@@ -1,8 +1,10 @@
+import { Component } from 'preact';
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { createElement } from '../lepus';
 import { setupDocument } from '../src/document';
 import { renderOpcodesInto, ssrHydrateByOpcodes } from '../src/opcodes';
+import renderToString from '../src/renderToOpcodes';
 import { createSnapshot, setupPage, SnapshotInstance, snapshotInstanceManager } from '../src/snapshot';
 import { DynamicPartType } from '../src/snapshot/dynamicPartType';
 import { elementTree } from './utils/nativeMethod';
@@ -93,5 +95,29 @@ describe('opcodes branch guards', () => {
 
     expect(vnode.props.count).toBe(2);
     expect(vnode.props.label).toBe('fallback');
+  });
+
+  it('renderToString should swallow thenable when boundary component is not marked dirty', () => {
+    const thenable = { then: () => {} };
+
+    function ThrowThenable() {
+      throw thenable;
+    }
+
+    class Boundary extends Component {
+      // @ts-expect-error internal preact field for suspend path in this renderer
+      __c = 1;
+
+      // keep DIRTY false after catch-path setState call
+      override setState(): void {}
+
+      override render() {
+        // @ts-expect-error internal preact DIRTY bit used by renderer
+        this.__d = false;
+        return createElement(ThrowThenable, null);
+      }
+    }
+
+    expect(() => renderToString(createElement(Boundary, null))).not.toThrow();
   });
 });
