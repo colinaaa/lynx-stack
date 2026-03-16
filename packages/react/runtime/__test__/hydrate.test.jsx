@@ -235,6 +235,38 @@ describe('dual-runtime hydrate', () => {
     `);
   });
 
+  it('should hydrate remove/insert without profile hooks when __PROFILE__ is false', async function() {
+    // @ts-expect-error test runtime flag
+    const prevProfile = globalThis.__PROFILE__;
+    // @ts-expect-error test runtime flag
+    globalThis.__PROFILE__ = false;
+
+    try {
+      const a = new SnapshotInstance(s);
+      a.ensureElements();
+      const b1 = new SnapshotInstance(s1);
+      const b2 = new SnapshotInstance(s2);
+      a.insertBefore(b1);
+      a.insertBefore(b2);
+
+      const aa = new BackgroundSnapshotInstance(s);
+      const bb1 = new BackgroundSnapshotInstance(s2);
+      const bb2 = new BackgroundSnapshotInstance(s3);
+      aa.insertBefore(bb1);
+      aa.insertBefore(bb2);
+
+      const patch = hydrate(JSON.parse(JSON.stringify(a)), aa);
+      expect(patch).toEqual(expect.arrayContaining([
+        2, // remove
+        1, // insert before (move/insert)
+        0, // create element
+      ]));
+    } finally {
+      // @ts-expect-error restore runtime flag
+      globalThis.__PROFILE__ = prevProfile;
+    }
+  });
+
   it('should works - upon empty render', async function() {
     const aa = new BackgroundSnapshotInstance('root');
 
