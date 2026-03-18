@@ -66,9 +66,9 @@ it('should re-throw exceptions through setTimeout when using fallback', async ()
   await Promise.resolve().then(() => {});
 
   expect(mockFn).toHaveBeenCalled();
-  
+
   // Advance timers to trigger setTimeout
   expect(() => vi.runAllTimers()).toThrow('Test Error');
-  
+
   vi.useRealTimers();
 });

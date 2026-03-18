@@ -68,3 +68,46 @@ describe('ListUpdateInfoRecording branch guards', () => {
     }
   });
 });
+
+it('sorts multiple insertions and removals correctly', () => {
+  const originalSdkVersion = SystemInfo.lynxSdkVersion;
+  const originalGetAttributeByName = __GetAttributeByName;
+
+  SystemInfo.lynxSdkVersion = '2.14';
+  globalThis.__GetAttributeByName = vi.fn(() => 'list-container');
+
+  const listElement = { props: {} };
+  const child1 = { type: 'item1', __listItemPlatformInfo: { 'item-key': '1' } };
+  const child2 = { type: 'item2', __listItemPlatformInfo: { 'item-key': '2' } };
+  const child3 = { type: 'item3', __listItemPlatformInfo: { 'item-key': '3' } };
+  const list = {
+    __id: 11,
+    __elements: [listElement],
+    __snapshot_def: { slot: [[0, 0]] },
+    childNodes: [child1, child2, child3],
+    type: 'list',
+  };
+
+  try {
+    const info = new ListUpdateInfoRecording(list as never);
+
+    // Trigger multiple removals
+    info.onRemoveChild(child1 as never);
+    info.onRemoveChild(child3 as never);
+
+    // Trigger multiple appendChild insertions
+    const newChild1 = { type: 'new1', __listItemPlatformInfo: { 'item-key': 'new1' } };
+    const newChild2 = { type: 'new2', __listItemPlatformInfo: { 'item-key': 'new2' } };
+    info.onInsertBefore(newChild1 as never);
+    info.onInsertBefore(newChild2 as never);
+
+    const [result] = info.toJSON();
+
+    expect(result.removeAction).toEqual([0, 2]);
+    expect(result.insertAction[0].type).toBe('new1');
+    expect(result.insertAction[1].type).toBe('new2');
+  } finally {
+    SystemInfo.lynxSdkVersion = originalSdkVersion;
+    globalThis.__GetAttributeByName = originalGetAttributeByName;
+  }
+});
