@@ -606,8 +606,6 @@ export class SnapshotInstance {
       if (s === DynamicPartType.Slot) {
         __ReplaceElement(newNode.__element_root!, __elements[elementIndex]!);
         __elements[elementIndex] = newNode.__element_root!;
-
-        /* v8 ignore start */
       } else if (s === DynamicPartType.MultiChildren) {
         if (__GetTag(__elements[elementIndex]!) === 'wrapper') {
           __ReplaceElement(newNode.__element_root!, __elements[elementIndex]!);
@@ -615,7 +613,6 @@ export class SnapshotInstance {
           __AppendElement(__elements[elementIndex]!, newNode.__element_root!);
         }
       }
-      /* v8 ignore stop */
     }
   }
 

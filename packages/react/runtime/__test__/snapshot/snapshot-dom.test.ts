@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { SnapshotInstance, snapshotManager } from '../../src/snapshot';
+import { elementTree } from '../utils/nativeMethod';
 
 describe('SnapshotInstance DOM methods', () => {
   it('contains and childNodes', () => {
-    snapshotManager.values.set('mock-div', { slot: [], create: Array as any } as any);
+    snapshotManager.values.set('mock-div', { slot: [[0, 0]], create: Array as any } as any);
 
     const parent = new SnapshotInstance('mock-div');
     const child1 = new SnapshotInstance('mock-div');
@@ -25,21 +26,22 @@ describe('SnapshotInstance DOM methods', () => {
 
   it('insertBefore and removeChild with MultiChildren (count > 1)', () => {
     snapshotManager.values.set('multi-div', {
-      slot: [[0, 0], [1, 0]],
-      create: () => [{}],
+      slot: [[2, 0], [2, 0]], // 2 is Slot
+      create: () => {
+        const root = elementTree.__CreateElement('view', 0, {});
+        const child = elementTree.__CreateElement('view', 0, {});
+        elementTree.__AppendElement(root, child);
+        return [child];
+      },
       isListHolder: false,
     } as any);
 
     const parent = new SnapshotInstance('multi-div');
-    parent.__elements = [{ children: [] }] as any;
+    parent.__elements = parent.__snapshot_def.create();
 
     const child1 = new SnapshotInstance('multi-div');
-    child1.__elements = [{ children: [] }] as any;
-    child1.__element_root = { children: [] } as any;
-
-    const child2 = new SnapshotInstance('multi-div');
-    child2.__elements = [{ children: [] }] as any;
-    child2.__element_root = { children: [] } as any;
+    child1.__elements = child1.__snapshot_def.create();
+    child1.__element_root = child1.__elements[0];
 
     // Trigger insertBefore with count > 1
     parent.insertBefore(child1);
@@ -49,5 +51,22 @@ describe('SnapshotInstance DOM methods', () => {
 
     // Test removeChild with count > 1
     parent.removeChild(child1);
+  });
+
+  it('insertBefore with count === 0', () => {
+    snapshotManager.values.set('multi-div-0', {
+      slot: [], // count === 0
+      create: () => [],
+      isListHolder: false,
+    } as any);
+
+    const parent = new SnapshotInstance('multi-div-0');
+    parent.__elements = [];
+
+    const child1 = new SnapshotInstance('multi-div-0');
+    child1.__elements = [];
+
+    // Trigger insertBefore with count === 0
+    parent.insertBefore(child1);
   });
 });
