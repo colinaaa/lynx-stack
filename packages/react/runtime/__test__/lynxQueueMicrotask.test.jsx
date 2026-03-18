@@ -36,3 +36,16 @@ describe('lynxQueueMicrotask', () => {
     expect(mockFn).toHaveBeenCalled();
   });
 });
+
+it('should fall back when lynx is null/falsy', async () => {
+  const mockFn = vi.fn();
+  vi.stubGlobal('lynx', null);
+
+  const { lynxQueueMicrotask } = await import('../src/utils');
+  lynxQueueMicrotask(mockFn);
+
+  expect(mockFn).not.toHaveBeenCalled();
+
+  await Promise.resolve().then(() => {});
+  expect(mockFn).toHaveBeenCalled();
+});

@@ -58,3 +58,11 @@ it('insertBefore with unknown type (e.g. Children) to hit the implicit else', ()
   // Trigger else branch of s === MultiChildren
   parent.insertBefore(child1);
 });
+
+it('ensureElements with MultiChildren (type = 5)', () => {
+  const parent = new SnapshotInstance('multi-div-type-5');
+  const child1 = new SnapshotInstance('multi-div-type-5');
+  parent.insertBefore(child1);
+  parent.__elements = undefined;
+  parent.ensureElements();
+});
