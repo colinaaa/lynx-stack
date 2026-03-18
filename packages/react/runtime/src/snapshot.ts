@@ -392,7 +392,6 @@ export class SnapshotInstance {
             index++;
             break;
           }
-          /* v8 ignore start */
           case DynamicPartType.MultiChildren: {
             if (__GetTag(elements[elementIndex]!) === 'wrapper') {
               __ReplaceElement(child.__element_root!, elements[elementIndex]!);
@@ -402,7 +401,6 @@ export class SnapshotInstance {
             index++;
             break;
           }
-          /* v8 ignore stop */
           case DynamicPartType.Children:
           case DynamicPartType.ListChildren: {
             __AppendElement(elements[elementIndex]!, child.__element_root!);

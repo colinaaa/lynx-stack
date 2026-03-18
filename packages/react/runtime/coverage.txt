@@ -2,19 +2,60 @@
 [1m[46m RUN [49m[22m [36mv4.0.18 [39m[90m/data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime[39m
       [2mCoverage enabled with [22m[33mv8[39m
 
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/alog/elementPAPICall.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 13[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/runOnBackground.test.js [2m([22m[2m10 tests[22m[2m)[22m[32m 20[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/backgroundSnapshot-branches.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 11[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/alog/render-branch.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/profile-module.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+[2m10:34:25 PM[22m [33m[1m[vite][22m[39m (ssr) warning: The JSX import source cannot be set without also enabling React's "automatic" JSX transform
+2  |  import { createElement as _createElement } from "../lepus";
+3  |  import * as ReactLynx from "/data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/src/internal.ts";
+4  |  /** @jsxImportSource ../lepus */ import { Component, createContext, Fragment, options } from 'preact';
+   |                       ^
+5  |  import { useMemo, useState } from 'preact/hooks';
+6  |  import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
+  Plugin: vite:esbuild
+  File: /data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/__test__/renderToOpcodes.test.jsx
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/runOnBackground.test.js [2m([22m[2m10 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate-list-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/element.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/alog/elementPAPICall.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+[2m10:34:25 PM[22m [33m[1m[vite][22m[39m (ssr) warning: The JSX import source cannot be set without also enabling React's "automatic" JSX transform
+2  |  import * as ReactLynx from "/data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/src/internal.ts";
+3  |  import * as ReactLynxRuntimeComponents from '@lynx-js/react/runtime-components';
+4  |  /** @jsxImportSource ../lepus */ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+   |                       ^
+5  |  import { elementTree, nativeMethodQueue } from './utils/nativeMethod';
+6  |  import { hydrate } from '../src/hydrate';
+
+  Plugin: vite:esbuild
+  File: /data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/__test__/list.test.jsx
+[2m10:34:25 PM[22m [33m[1m[vite][22m[39m (ssr) warning: The JSX import source cannot be set without also enabling React's "automatic" JSX transform
+2  |  import * as ReactLynx from "/data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/src/internal.ts";
+3  |  import * as ReactLynxRuntimeComponents from '@lynx-js/react/runtime-components';
+4  |  /** @jsxImportSource ../lepus */ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from...
+   |                       ^
+5  |  import { globalEnvManager } from './utils/envManager';
+6  |  import { elementTree, options } from './utils/nativeMethod';
+
+  Plugin: vite:esbuild
+  File: /data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/__test__/ssr.test.jsx
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/compat.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 12[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/reload-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/alog/render-branch.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynxQueueMicrotask.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/backgroundSnapshot-branches.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 17[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/commit-branch.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 13[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/suspense-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 201[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hooks/useLynxGlobalEventListener-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 181[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/lazy-bundle.test.js [2m([22m[2m24 tests[22m[2m | [22m[33m4 skipped[39m[2m)[22m[32m 285[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx-api.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/lazy-bundle.test.js [2m([22m[2m24 tests[22m[2m | [22m[33m4 skipped[39m[2m)[22m[33m 395[2mms[22m[39m
+       [33m[2m✓[22m[39m should have lynx.loadLazyBundle [33m 362[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hooks/useLynxGlobalEventListener-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 31[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/suspense-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 37[2mms[22m[39m
+[2m10:34:25 PM[22m [33m[1m[vite][22m[39m (ssr) warning: The JSX import source cannot be set without also enabling React's "automatic" JSX transform
+5  |  // Licensed under the Apache License Version 2.0 that can be found in the
+6  |  // LICENSE file in the root directory of this source tree.
+7  |  */ /** @jsxImportSource ../../lepus */ import { useMainThreadRef } from '../../src/worklet/ref/workletRef';
+   |                          ^
+8  |  /* v8 ignore start */ let ref1;
+9  |  let ref2;
+
+  Plugin: vite:esbuild
+  File: /data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/__test__/snapshot/workletRefMT.jsx
 [90mstdout[2m | __test__/debug/printSnapshot.test.jsx[2m > [22m[2mprintSnapshotInstance[2m > [22m[2mprintToScreen
 [22m[39m| 5(__snapshot_a94a8_test_1): undefined
   | 6(__snapshot_a94a8_test_2): undefined
@@ -31,106 +72,150 @@
     | -9(__snapshot_a94a8_test_3): ["attr 1","attr 2"]
   | -8(__snapshot_a94a8_test_2): undefined
 
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/processEvalResult.test.js [2m([22m[2m2 tests[22m[2m)[22m[33m 408[2mms[22m[39m
-     [33m[2m✓[22m[39m main-thread [33m 406[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/remove-scoped-main-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 9[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/missing-suspense.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 151[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/destroy.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 147[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/undefined-component.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 146[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/scoped-lazy-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 11[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/scoped-main-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 11[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/remove-scoped-lazy-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 10[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/object-as-child.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 151[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/set-state-in-ctor.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 151[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/hooks-in-render.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 268[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/printSnapshot.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 16[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/opcodes-branch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/render-branch.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/scoped-main-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/opcodes-branch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/remove-scoped-lazy-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/scoped-lazy-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 10[2mms[22m[39m
+[90mstderr[2m | __test__/debug/set-state-in-ctor.test.jsx[2m > [22m[2mpreact/debug - this.setState in constructor
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+Calling "this.setState" inside the constructor of a component is a no-op and might be a bug in your application. Instead, set "this.state = {}" directly.
+
+  in Bar
+  in App
+
+
+[90mstderr[2m | __test__/debug/object-as-child.test.jsx[2m > [22m[2mpreact/debug - Objects are not valid as a child
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/printSnapshot.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+[90mstderr[2m | __test__/debug/undefined-component.test.jsx[2m > [22m[2mpreact/debug - Undefined component passed to createElement()
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+
+[90mstderr[2m | __test__/debug/missing-suspense.test.jsx[2m > [22m[2mpreact/debug - Missing Suspense
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/backgroundSnapshot-profile.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/render-branch.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/hooks-invalid-args.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 152[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/delayed-lifecycle-events.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 19[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 21[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/workletRef.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 29[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/render.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 16[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateGlobalProps.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/injectLepusMethods.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/css/remove-scoped-main-bundle.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 14[2mms[22m[39m
+[90mstderr[2m | __test__/debug/jsx-twice.test.jsx[2m > [22m[2mpreact/debug - Invalid type passed to createElement()
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/basic.test.jsx [2m([22m[2m11 tests[22m[2m)[22m[32m 25[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/injectLepusMethods.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 23[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 25[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/jsx-twice.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 56[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/too-many-rerenders.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 66[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/runOnMainThread.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/hooks-in-render.test.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 423[2mms[22m[39m
+   [33m[2m✓[22m[39m preact/debug - Hook can only be invoked from render methods [33m 422[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/set-state-in-ctor.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 177[2mms[22m[39m
+[90mstderr[2m | __test__/debug/children-with-same-key.test.jsx[2m > [22m[2mpreact/debug - children with the same key attribute
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+Following component has two or more children with the same key attribute: "1". This may cause glitches and misbehavior in rendering process. Component: 
+
+<Bar />
+
+  in Bar
+  in App
+
+
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/processEvalResult.test.js [2m([22m[2m2 tests[22m[2m)[22m[33m 531[2mms[22m[39m
+     [33m[2m✓[22m[39m main-thread [33m 529[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/react-hooks-profile.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/delayed-lifecycle-events.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 22[2mms[22m[39m
+[90mstderr[2m | __test__/debug/too-many-rerenders.test.jsx[2m > [22m[2mpreact/debug - Too many re-renders
+[22m[39mAdd @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.
+
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/missing-suspense.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 179[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/children-with-same-key.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateGlobalProps.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/jsx-twice.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 43[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/workletRef.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/object-as-child.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 165[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/destroy.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 176[2mms[22m[39m
+[2m10:34:26 PM[22m [33m[1m[vite][22m[39m (ssr) warning: The JSX import source cannot be set without also enabling React's "automatic" JSX transform
+5  |  // Licensed under the Apache License Version 2.0 that can be found in the
+6  |  // LICENSE file in the root directory of this source tree.
+7  |  */ /** @jsxImportSource ../../lepus */ import { useState } from '../../src/index';
+   |                          ^
+8  |  const __snapshot_a94a8_test_1 = "__snapshot_a94a8_test_1";
+9  |  ReactLynx.snapshotCreatorMap[__snapshot_a94a8_test_1] = (__snapshot_a94a8_test_1)=>ReactLynx.createSnapshot(__snapsho...
+
+  Plugin: vite:esbuild
+  File: /data00/home/wangqingyu.c0l1n/coco/lynx-stack/packages/react/runtime/__test__/lifecycle/reloadMT.jsx
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hooks/useLynxGlobalEventListener.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/timing.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 63[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/workletRef.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 50[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hooks/useLynxGlobalEventListener.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshotPatch.test.jsx [2m([22m[2m27 tests[22m[2m | [22m[33m1 skipped[39m[2m)[22m[32m 75[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/spread.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 49[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/too-many-rerenders.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 47[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/isRendering.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/hooks-invalid-args.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 168[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/undefined-component.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 176[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/event.test.jsx [2m([22m[2m11 tests[22m[2m)[22m[32m 61[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/render.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle.test.jsx [2m([22m[2m12 tests[22m[2m)[22m[32m 93[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ref.test.jsx [2m([22m[2m24 tests[22m[2m | [22m[33m1 skipped[39m[2m)[22m[32m 97[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateData.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 76[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/suspense.test.jsx [2m([22m[2m12 tests[22m[2m)[22m[32m 83[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/profile.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 28[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshotPatch.test.jsx [2m([22m[2m27 tests[22m[2m | [22m[33m1 skipped[39m[2m)[22m[32m 68[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/timing.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 65[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/react-hooks-profile.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 34[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/initData.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[32m 32[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/workletEvent.test.jsx [2m([22m[2m13 tests[22m[2m)[22m[32m 85[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ref.test.jsx [2m([22m[2m24 tests[22m[2m | [22m[33m1 skipped[39m[2m)[22m[32m 94[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/isRendering.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[32m 26[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/children-with-same-key.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 116[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/preact.test.jsx [2m([22m[2m15 tests[22m[2m)[22m[32m 109[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle.test.jsx [2m([22m[2m12 tests[22m[2m)[22m[32m 95[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/gesture.test.jsx [2m([22m[2m10 tests[22m[2m)[22m[32m 49[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/event.test.jsx [2m([22m[2m11 tests[22m[2m)[22m[32m 68[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateData.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 72[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/spread.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 47[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/suspense.test.jsx [2m([22m[2m12 tests[22m[2m)[22m[32m 87[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/renderToOpcodes.test.jsx [2m([22m[2m43 tests[22m[2m)[22m[32m 76[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/ssr.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 39[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/page.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 54[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate-list-extended.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/initData.test.jsx [2m([22m[2m5 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/runOnMainThread.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/gesture.test.jsx [2m([22m[2m10 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/renderToOpcodes.test.jsx [2m([22m[2m43 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/preact.test.jsx [2m([22m[2m15 tests[22m[2m)[22m[32m 107[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/workletEvent.test.jsx [2m([22m[2m13 tests[22m[2m)[22m[32m 82[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/profile-module.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/ssr.test.jsx [2m([22m[2m9 tests[22m[2m)[22m[32m 41[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/spread-branch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/reload.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 135[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/list.test.jsx [2m([22m[2m42 tests[22m[2m)[22m[32m 137[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/module-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 8[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/destroy-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 8[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/utils/runtimeProxy.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynxQueueMicrotask.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/listUpdateInfo-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate-list-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/vnodeSource.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/workletRef-branch.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/hmr.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateMainThread-error.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 10[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ensureElements-attr.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/pendingListUpdates-null-guards.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dom.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/performance-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ref-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/transform.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/gesture-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/error-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/formatPatch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dev-guards.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/execIdMap.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/hydrate-list-extended.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/page.test.jsx [2m([22m[2m6 tests[22m[2m)[22m[32m 54[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/reload.test.jsx [2m([22m[2m8 tests[22m[2m)[22m[32m 120[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/module-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/list.test.jsx [2m([22m[2m42 tests[22m[2m)[22m[32m 139[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx-api.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/export.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/list-lifecycle.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/legacy-react-runtime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dom-multichildren.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/initData-factory.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-listholder.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/error.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/listUpdateInfo-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/utils/runtimeProxy.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/performance-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/destroy-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/vnodeSource.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/updateMainThread-error.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ref-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/error-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/formatPatch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/describeInvalidValue.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/ensureElements-attr.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/pendingListUpdates-null-guards.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/execIdMap.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/utils/isDirectOrDeepEqual-branch.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/debug/describeInvalidValue.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/runWithForce-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dom-multichildren.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dev-guards.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/workletRef-branch.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/initData-factory.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/transform.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/onPost.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-dom.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/event/jsReady.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/export.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/snapshot-listholder.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
  [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/snapshotPatchApply-dev-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/onPost.test.js [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/hooks.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lazy.test.js [2m([22m[2m9 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/worklet/hmr.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/legacy-react-runtime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lifecycle/patch/error.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/snapshot/gesture-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lynx/runWithForce-branch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/compat/hooks.test.jsx [2m([22m[2m7 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m react/runtime [49m[39m __test__/lazy.test.js [2m([22m[2m9 tests[22m[2m)[22m[32m 7[2mms[22m[39m
 
 [2m Test Files [22m [1m[32m101 passed[39m[22m[90m (101)[39m
-[2m      Tests [22m [1m[32m528 passed[39m[22m[2m | [22m[33m2 skipped[39m[2m | [22m[90m4 todo[39m[90m (534)[39m
-[2m   Start at [22m 22:21:03
-[2m   Duration [22m 3.08s[2m (transform 74.54s, setup 59.97s, import 48.32s, tests 4.60s, environment 13ms)[22m
+[2m      Tests [22m [1m[32m530 passed[39m[22m[2m | [22m[33m2 skipped[39m[2m | [22m[90m4 todo[39m[90m (536)[39m
+[2m   Start at [22m 22:34:23
+[2m   Duration [22m 3.16s[2m (transform 79.20s, setup 59.65s, import 52.18s, tests 4.69s, environment 12ms)[22m
 
 [34m % [39m[2mCoverage report from [22m[33mv8[39m
 -------------------|---------|----------|---------|---------|-------------------
 File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 -------------------|---------|----------|---------|---------|-------------------
-All files          |   99.95 |    99.84 |   99.71 |     100 |                   
+All files          |   99.95 |      100 |   99.72 |     100 |                   
  __test__          |     100 |      100 |     100 |     100 |                   
   ...Suspender.jsx |     100 |      100 |     100 |     100 |                   
  __test__/snapshot |       0 |        0 |       0 |       0 |                   
@@ -148,7 +233,7 @@ All files          |   99.95 |    99.84 |   99.71 |     100 |
   target.js        |     100 |      100 |     100 |     100 |                   
  lepus             |     100 |      100 |     100 |     100 |                   
   index.js         |     100 |      100 |     100 |     100 |                   
- src               |   99.89 |    99.61 |   99.25 |     100 |                   
+ src               |   99.89 |      100 |   99.27 |     100 |                   
   ...ndSnapshot.ts |     100 |      100 |     100 |     100 |                   
   document.ts      |     100 |      100 |     100 |     100 |                   
   hydrate.ts       |     100 |      100 |     100 |     100 |                   
@@ -159,9 +244,9 @@ All files          |   99.95 |    99.84 |   99.71 |     100 |
   lynx-api.ts      |     100 |      100 |     100 |     100 |                   
   opcodes.ts       |     100 |      100 |     100 |     100 |                   
   ...istUpdates.ts |     100 |      100 |     100 |     100 |                   
-  snapshot.ts      |     100 |    99.29 |     100 |     100 | 388               
+  snapshot.ts      |     100 |      100 |     100 |     100 |                   
   ...drationMap.ts |     100 |      100 |     100 |     100 |                   
-  utils.ts         |     100 |    96.77 |     100 |     100 | 88                
+  utils.ts         |     100 |      100 |     100 |     100 |                   
  src/alog          |     100 |      100 |     100 |     100 |                   
   ...ntPAPICall.ts |     100 |      100 |     100 |     100 |                   
   index.ts         |     100 |      100 |     100 |     100 |                   

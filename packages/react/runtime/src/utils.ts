@@ -80,24 +80,23 @@ export function hook<T, K extends keyof T>(
   } as T[K];
 }
 
-/* v8 ignore start */
-const resolvedPromise = typeof globalThis.Promise === 'function' ? globalThis.Promise.resolve() : null;
-/* v8 ignore stop */
-
 export const lynxQueueMicrotask: typeof lynx.queueMicrotask = (fn) => {
   if (lynx && lynx.queueMicrotask) {
     return lynx.queueMicrotask(fn);
-  } /* v8 ignore start */
-  else if (resolvedPromise) {
-    // Schedule as a microtask, and surface exceptions like queueMicrotask would.
-    resolvedPromise.then(fn).catch((err) => {
-      setTimeout(() => {
-        throw err;
-      }, 0);
-    });
-  } else {
+  }
+
+  /* v8 ignore start */
+  if (typeof globalThis.Promise !== 'function') {
     // Fallback to macrotask when microtasks aren't available.
     setTimeout(fn, 0);
+    return;
   }
   /* v8 ignore stop */
+
+  // Schedule as a microtask, and surface exceptions like queueMicrotask would.
+  globalThis.Promise.resolve().then(fn).catch((err) => {
+    setTimeout(() => {
+      throw err;
+    }, 0);
+  });
 };

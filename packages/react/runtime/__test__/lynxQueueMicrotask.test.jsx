@@ -49,3 +49,26 @@ it('should fall back when lynx is null/falsy', async () => {
   await Promise.resolve().then(() => {});
   expect(mockFn).toHaveBeenCalled();
 });
+
+it('should re-throw exceptions through setTimeout when using fallback', async () => {
+  const { lynxQueueMicrotask } = await import('../src/utils');
+
+  vi.stubGlobal('lynx', null);
+  vi.useFakeTimers();
+
+  const mockFn = vi.fn(() => {
+    throw new Error('Test Error');
+  });
+
+  lynxQueueMicrotask(mockFn);
+
+  // await the microtask
+  await Promise.resolve().then(() => {});
+
+  expect(mockFn).toHaveBeenCalled();
+  
+  // Advance timers to trigger setTimeout
+  expect(() => vi.runAllTimers()).toThrow('Test Error');
+  
+  vi.useRealTimers();
+});

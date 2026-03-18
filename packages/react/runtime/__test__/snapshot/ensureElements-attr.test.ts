@@ -87,3 +87,26 @@ describe('ensureElements missing branches', () => {
     parentListChildren.ensureElements();
   });
 });
+
+  it('handles MultiChildren in switch', () => {
+    snapshotManager.values.set('switch-multichildren', {
+      slot: [[5, 1], [5, 2]], // 5 is MultiChildren, use index 1 and 2
+      create: () => {
+        const root = elementTree.__CreateElement('view', 0, {});
+        const child1 = elementTree.__CreateElement('view', 0, {});
+        const child2 = elementTree.__CreateElement('wrapper', 0, {});
+        elementTree.__AppendElement(root, child1);
+        elementTree.__AppendElement(root, child2);
+        return [root, child1, child2];
+      },
+      isListHolder: false,
+    } as any);
+
+    const parentMultiChildren = new SnapshotInstance('switch-multichildren');
+    const child1 = new SnapshotInstance('switch-multichildren');
+    const child2 = new SnapshotInstance('switch-multichildren');
+    parentMultiChildren.insertBefore(child1);
+    parentMultiChildren.insertBefore(child2, child1); // prepend
+    parentMultiChildren.__elements = undefined;
+    parentMultiChildren.ensureElements();
+  });
