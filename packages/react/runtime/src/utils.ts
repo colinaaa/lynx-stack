@@ -83,9 +83,9 @@ export function hook<T, K extends keyof T>(
 export const lynxQueueMicrotask: typeof lynx.queueMicrotask = /* @__PURE__ */ (() => {
   if (lynx.queueMicrotask) {
     return (fn) => lynx.queueMicrotask(fn);
-  } else if (typeof globalThis.Promise === 'function') {
+  } /* v8 ignore start */
+  else if (typeof globalThis.Promise === 'function') {
     const resolved = globalThis.Promise.resolve();
-    /* v8 ignore start */
     return (fn) => {
       // Schedule as a microtask, and surface exceptions like queueMicrotask would.
       resolved.then(fn).catch((err) => {

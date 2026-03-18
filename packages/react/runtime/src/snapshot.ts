@@ -402,12 +402,16 @@ export class SnapshotInstance {
             index++;
             break;
           }
-          /* v8 ignore end */
+          /* v8 ignore stop */
           case DynamicPartType.Children:
           case DynamicPartType.ListChildren: {
             __AppendElement(elements[elementIndex]!, child.__element_root!);
             break;
           }
+          case DynamicPartType.Attr:
+          case DynamicPartType.Spread:
+          default:
+            break;
         }
 
         child = child.__nextSibling;
@@ -611,7 +615,7 @@ export class SnapshotInstance {
           __AppendElement(__elements[elementIndex]!, newNode.__element_root!);
         }
       }
-      /* v8 ignore end */
+      /* v8 ignore stop */
     }
   }
 

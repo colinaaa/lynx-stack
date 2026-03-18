@@ -1,7 +1,9 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BackgroundSnapshotInstance, hydrate } from '../../src/backgroundSnapshot';
+import { SnapshotInstance } from '../../src/snapshot';
+import { SnapshotInstance } from '../../src/snapshot';
 import { setPipeline, globalPipelineOptions } from '../../src/lynx/performance';
-import { snapshotManager } from '../../src/snapshot';
+import { snapshotManager, SnapshotInstance } from '../../src/snapshot';
 import { initGlobalSnapshotPatch, deinitGlobalSnapshotPatch } from '../../src/lifecycle/patch/snapshotPatch';
 import { applyQueuedRefs } from '../../src/snapshot/ref';
 
@@ -215,5 +217,28 @@ describe('BackgroundSnapshotInstance branches', () => {
     expect(() => {
       parent.removeChild(orphan);
     }).toThrow('The node to be removed is not a child of this node.');
+  });
+
+  it('covers remaining switch branches in ensureElements', () => {
+    const TAG_ATTR = 'test-attr';
+    snapshotManager.values.set(TAG_ATTR, { slot: [[0, 0]], create: Array as any } as any);
+    const instAttr = new SnapshotInstance(TAG_ATTR);
+    instAttr.__firstChild = new SnapshotInstance(TAG_ATTR);
+    instAttr.ensureElements();
+    snapshotManager.values.delete(TAG_ATTR);
+
+    const TAG_SPREAD = 'test-spread';
+    snapshotManager.values.set(TAG_SPREAD, { slot: [[1, 0]], create: Array as any } as any);
+    const instSpread = new SnapshotInstance(TAG_SPREAD);
+    instSpread.__firstChild = new SnapshotInstance(TAG_SPREAD);
+    instSpread.ensureElements();
+    snapshotManager.values.delete(TAG_SPREAD);
+
+    const TAG_DEFAULT = 'test-default';
+    snapshotManager.values.set(TAG_DEFAULT, { slot: [[-1, 0]], create: Array as any } as any);
+    const instDefault = new SnapshotInstance(TAG_DEFAULT);
+    instDefault.__firstChild = new SnapshotInstance(TAG_DEFAULT);
+    instDefault.ensureElements();
+    snapshotManager.values.delete(TAG_DEFAULT);
   });
 });
