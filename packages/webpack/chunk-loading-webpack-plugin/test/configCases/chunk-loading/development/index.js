@@ -1,12 +1,18 @@
+// Copyright 2024 The Lynx Authors. All rights reserved.
+// Licensed under the Apache License Version 2.0 that can be found in the
+// LICENSE file in the root directory of this source tree.
+
 /// <reference types="@rspack/test-tools/rstest" />
 
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-const require = createRequire(__filename);
+/* global __filename, __dirname, rstest */
 
-globalThis.lynx = {
+const require = createRequire(__filename);
+const dynamicChunkAssetPattern = /(?:^|_)dynamic_js\..+\.cjs$/;
+const lynx = (globalThis.lynx = {
   requireModuleAsync: rstest.fn(function requireModuleAsync(request, callback) {
     return Promise.resolve().then(() => {
       try {
@@ -16,17 +22,13 @@ globalThis.lynx = {
       }
     });
   }),
-};
+});
 
 it('should have dynamic chunks', () => {
+  const assets = fs.readdirSync(__dirname);
+
   expect(
-    fs.existsSync(
-      path.join(
-        __dirname,
-        'chunk-loading_development_dynamic_js.'
-          + path.basename(__filename).replace('.js', '.cjs'),
-      ),
-    ),
+    assets.some(asset => dynamicChunkAssetPattern.test(asset)),
   ).toBeTruthy();
 });
 
