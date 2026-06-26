@@ -1,0 +1,35 @@
+.github/workflows/workflow-website.yml
+  s_d935653111b678::t_8ccf005bfe73dd 28-30
+.github/workflows/workflow-build.yml
+  s_d935653111b678::t_7c4ff6de8cd8eb 104
+.github/workflows/workflow-bundle-analysis.yml
+  s_d935653111b678::t_f53faa59de9549 45-47
+.github/workflows/workflow-bench.yml
+  s_d935653111b678::t_19254e96cef70a 39-40
+.github/workflows/test.yml
+  s_d935653111b678::t_045c23f4a17fe5 47-48
+.github/workflows/workflow-test.yml
+  s_d935653111b678::t_0b6d9634aca3e4 90
+.github/workflows/deploy-main.yml
+  s_d935653111b678::t_6a715b1aa234f9 158-160,205-207
+  s_d935653111b678::t_ebac50608b94f0 36-37
+.github/actions/pnpm-install/action.yml
+  s_d935653111b678::t_94acf3c800affc 1-24,26-48
+  s_d935653111b678::t_b358a40866bb31 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "9e5d54ae94136248125d21218b83bc9ced518442",
+  "prompts": {},
+  "sessions": {
+    "s_d935653111b678": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0fcfd733fffe7uDTb53rn3v6Os",
+        "model": "c_o_new_thinking__dev"
+      },
+      "human_author": null
+    }
+  }
+}
