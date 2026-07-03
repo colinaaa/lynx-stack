@@ -1,0 +1,34 @@
+.github/actions/pnpm-install/action.yml
+  s_d935653111b678::t_94acf3c800affc 1-48
+.github/workflows/test.yml
+  s_d935653111b678::t_045c23f4a17fe5 47-48
+.github/workflows/workflow-bundle-analysis.yml
+  s_d935653111b678::t_f53faa59de9549 45-47
+.github/workflows/workflow-website.yml
+  s_d935653111b678::t_8ccf005bfe73dd 28-30
+.github/workflows/workflow-test.yml
+  s_d935653111b678::t_0b6d9634aca3e4 90
+.github/workflows/workflow-build.yml
+  s_d935653111b678::t_7c4ff6de8cd8eb 104
+.github/workflows/workflow-bench.yml
+  s_d935653111b678::t_19254e96cef70a 39-40
+.github/workflows/deploy-main.yml
+  s_d935653111b678::t_ebac50608b94f0 36-37
+  s_d935653111b678::t_6a715b1aa234f9 158-160,205-207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "7c67890a8a9c959b8c7a849be99578aadb9baf36",
+  "prompts": {},
+  "sessions": {
+    "s_d935653111b678": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0fcfd733fffe7uDTb53rn3v6Os",
+        "model": "c_o_new_thinking__dev"
+      },
+      "human_author": "Qingyu Wang <40660121+colinaaa@users.noreply.github.com>"
+    }
+  }
+}
