@@ -1,0 +1,19 @@
+packages/react/runtime/__test__/guardrails/snapshot-containment.test.ts
+  s_b616f4e3eebd48::t_8d2ae4d3db4130 150-158,162-167,169-181
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "4853ab827eb56b6388803e15f436c497276c735b",
+  "prompts": {},
+  "sessions": {
+    "s_b616f4e3eebd48": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0b4c8fdf1ffeuMhDy2InRGkj4q",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Qingyu Wang <40660121+colinaaa@users.noreply.github.com>"
+    }
+  }
+}
