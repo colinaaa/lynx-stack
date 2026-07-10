@@ -1,0 +1,33 @@
+.github/react-runtime.instructions.md
+  s_f334e2b1ce1800::t_9be3f083d482c4 9
+packages/react/runtime/__test__/guardrails/snapshot-containment.test.ts
+  s_f334e2b1ce1800::t_5ec28d0012653e 150-159
+packages/react/runtime/src/snapshot/lynx/injectLepusMethods.ts
+  s_ec317477f24023::t_a5b3b4ae217844 4
+packages/react/runtime/src/snapshot/snapshot/snapshot.ts
+  s_ec317477f24023::t_4d14cb412a97ff 23,91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "e7fc049817dff7e53e7744de06ccada68834b2b2",
+  "prompts": {},
+  "sessions": {
+    "s_ec317477f24023": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4b4e-e8b8-7bd1-82fb-52de9926f3e8",
+        "model": "unknown"
+      },
+      "human_author": "Qingyu Wang <40660121+colinaaa@users.noreply.github.com>"
+    },
+    "s_f334e2b1ce1800": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0b49f4dd4ffeM37WTDWwCUDRaW",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Qingyu Wang <40660121+colinaaa@users.noreply.github.com>"
+    }
+  }
+}
