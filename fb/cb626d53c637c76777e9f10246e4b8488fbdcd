@@ -1,0 +1,83 @@
+.changeset/template-config-defaults.md
+  s_48747a562cdb24::t_23823802aa7a03 1-5
+.github/template-webpack-plugin-config.instructions.md
+  s_48747a562cdb24::t_d9a311eb7f478a 1-5
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/basic/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_b2105fd2836ddd 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/basic/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_d0ab1ab5701354 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/basic/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_6f7c0ccc67c366 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/enable-css-selector/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_f5b66ff80a1e98 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/enable-css-selector/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_8d05ee92e197fb 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/enable-css-selector/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_2430a2e1bb99fc 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/scoped/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_8deaac7d33ba14 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/scoped/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_c303b2620fdbd4 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/css/scoped/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_f8703d74f27126 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/bundle-splitting/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_65ef07526007dc 10-12,43-45,99-101,187-189
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/bundle-splitting/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_17a55d300d5c17 45-47,101-103,189-191
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/chunk-splitting/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_6fcf785baf895a 17-20,51-53,214-216,377-379,540-542
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/chunk-splitting/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_088a5643b17def 17,19,21,23,59-61,236-238,413-415,590-592
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/chunk-splitting/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_60c96dbb83d109 17,19,21,23,59-61,236-238,413-415,590-592
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/default/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_baadf11398e8f1 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/default/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_b33869a8d9e1eb 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/default/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_e48a1b217575f6 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/filename/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_a139c8c638f04b 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/filename/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_fa26535d316a2e 9,55-57
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/filename/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_c6fecbcf03b912 9,55-57
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/nested/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_7c005bb1873a6b 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/nested/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_a8c342dfe6565b 9,55-57
+packages/webpack/css-extract-webpack-plugin/test/hotCases/hot-update-json/nested/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_711322a9a6947a 9,55-57
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/basic/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_fab1799b14726a 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/basic/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_fdd9b259963db2 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/basic/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_796e33e07a0482 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/export-default/__snapshot__/rspack/0.snap.txt
+  s_48747a562cdb24::t_da5f86422e63a4 8,39-41
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/export-default/__snapshot__/rspack/1.snap.txt
+  s_48747a562cdb24::t_d8a5f3e02e53a0 8,41-43
+packages/webpack/css-extract-webpack-plugin/test/hotCases/modules/export-default/__snapshot__/rspack/2.snap.txt
+  s_48747a562cdb24::t_3ba91cc1a4d333 8,41-43
+packages/webpack/template-webpack-plugin/src/LynxTemplatePlugin.ts
+  s_48747a562cdb24::t_8645920c9b28fe 1035-1037
+packages/webpack/template-webpack-plugin/test/__snapshots__/cases.test.ts.snap
+  s_48747a562cdb24::t_f6129ee55c291b 27,31-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "fbcb626d53c637c76777e9f10246e4b8488fbdcd",
+  "prompts": {},
+  "sessions": {
+    "s_48747a562cdb24": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f82fd-8228-7c10-bfdc-b1020f8e83be",
+        "model": "unknown"
+      },
+      "human_author": "Qingyu Wang <wangqingyu.c0l1n@bytedance.com>"
+    }
+  }
+}
