@@ -1,0 +1,29 @@
+packages/react/transform/crates/swc_plugin_compat/lib.rs
+  s_400f4933bf60f3::t_b1ab53ace64826 114,136,158,180-181,205,260,287,309,334
+packages/react/transform/crates/swc_plugin_compat/napi.rs
+  s_400f4933bf60f3::t_dc4186d6531089 147,169,191,213-214,238,293,320,342,367
+packages/react/transform/crates/swc_plugin_shake/lib.rs
+  s_400f4933bf60f3::t_175adb16e20b87 36-37,40,62-63,88-89,114-115
+packages/react/transform/crates/swc_plugin_shake/napi.rs
+  s_400f4933bf60f3::t_73459db09142c4 29-30,33,55-56,81-82,107-108
+packages/react/transform/src/swc_plugin_extract_str/mod.rs
+  s_400f4933bf60f3::t_86aa53e45a25fc 20
+packages/rspeedy/core/src/config/output/source-map.ts
+  s_400f4933bf60f3::t_e3c49a60ba2cf7 79-80,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "a2965ae441dd5e6de906f26a75b9cfdd5614537c",
+  "prompts": {},
+  "sessions": {
+    "s_400f4933bf60f3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc64b-ff31-7ae2-be7f-74c2ae6ff0ea",
+        "model": "unknown"
+      },
+      "human_author": "Qingyu Wang <wangqingyu.c0l1n@bytedance.com>"
+    }
+  }
+}
