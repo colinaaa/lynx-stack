@@ -1,0 +1,19 @@
+.changeset/purple-feet-kneel.md
+  s_400f4933bf60f3::t_4e66b72d1c7b0f 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "12f1247790a329defa819c26b5fd41ed79b6e6c6",
+  "prompts": {},
+  "sessions": {
+    "s_400f4933bf60f3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc64b-ff31-7ae2-be7f-74c2ae6ff0ea",
+        "model": "unknown"
+      },
+      "human_author": "Qingyu Wang <wangqingyu.c0l1n@bytedance.com>"
+    }
+  }
+}
